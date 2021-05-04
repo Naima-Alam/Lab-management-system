@@ -34,7 +34,7 @@
             {{ $data->appointmentTest->test_name}}
             @endisset
         </td>
-        <td>{{ $data->slot_id}}</td>
+        <td>{{ $data->appointmentSlot->form_time}}-{{ $data->appointmentSlot->to_time}}</td>
         <td>{{ $data->appointment_date}}</td>
         <td>{{ $data->reason_name}}</td>
 
@@ -44,7 +44,7 @@
                 <a class="btn btn-sm btn-primary" href="{{  route('appointment.view',$data->id) }}">View</a>
 
                 <a class="btn btn-sm btn-success" href="{{ route('appointment.status',['id'=>$data->id, 'status'=>'confirmed']) }}">Accepted</a>
-                
+
                 <a class="btn btn-sm btn-danger" href="{{ route('appointment.rejected', $data->id) }}">Rejected</a>
 
             {{--</div>

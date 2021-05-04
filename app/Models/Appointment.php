@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Timeslot;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Appointment extends Model
 {
@@ -23,5 +24,9 @@ class Appointment extends Model
     public function appointmentTest(){
 
         return $this->belongsTo(TestInformation::class, 'test_id', 'id'); //relation
+    }
+    public function appointmentSlot(){
+
+        return $this->belongsTo(Timeslot::class, 'slot_id', 'id'); //relation
     }
 }

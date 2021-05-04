@@ -69,6 +69,7 @@
                     <th scope="col">Doctor Name</th>
                     <th scope="col">Consultation time</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Test Report</th>
                 </tr>
             </thead>
             <tbody>
@@ -81,6 +82,9 @@
                     <td>{{ $data->appointmentDoctor->doctors_name }}</td>
                     <td>{{ $data->slot_id }}</td>
                     <td>{{ $data->status }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-primary"  href="{{ route('testreport.list',$data->id)}}">View</a>
+                    </td>
                 </tr>
                 @endforeach
 

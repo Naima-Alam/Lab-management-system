@@ -18,7 +18,7 @@ class AppointmentController extends Controller
     // For All
     public function all()
     {
-        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->where('status','confirmed')->paginate(1); //for paginate
+        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->with('appointmentSlot')->where('status','confirmed')->paginate(1); //for paginate
         $total_user = User::count();
         return view('backend.partials.appointment.all', compact('appointment', 'total_user'));
     }
@@ -131,7 +131,9 @@ Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment))
     //test report list
     public function testreport()
     {
-        
+      $appointment_list=Appointment::where('patient_id',auth()->user()->id)->get();
+      $patients_list=User::all();
+      return view('backend.partials.appointment.apppointmentreport',compact('appointment_list','patients_list'));
     }
 
 
