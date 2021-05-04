@@ -22,10 +22,7 @@
         <th>Tests Name</th>
         <td>{{$test->test_name}}</td>
     </tr>
-    <tr>
-        <th>Test Id</th>
-        <td>{{$test->test_id}}</td>
-    </tr>
+
 
     <tr>
         <th>Test Slot</th>
@@ -39,6 +36,10 @@
     <tr>
         <th>Test Description</th>
         <td>{{$test->description}}</td>
+    </tr>
+    <tr>
+        <th>Report Prepared By</th>
+        <td>{{$test->prepared_by}}</td>
     </tr>
 
 </table>

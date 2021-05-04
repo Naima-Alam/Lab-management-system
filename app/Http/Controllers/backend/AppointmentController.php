@@ -18,7 +18,7 @@ class AppointmentController extends Controller
     // For All
     public function all()
     {
-        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->onlyTrashed()->paginate(1); //for paginate
+        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->where('status','confirmed')->paginate(1); //for paginate
         $total_user = User::count();
         return view('backend.partials.appointment.all', compact('appointment', 'total_user'));
     }
@@ -27,7 +27,7 @@ class AppointmentController extends Controller
     public function new()
     {
         //dd($appointment);
-        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->paginate(3); //for paginate
+        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->where('status','pending')->paginate(3); //for paginate
         return view('backend.partials.appointment.new', compact('appointment'));
     }
 
@@ -64,6 +64,7 @@ $appointment=Appointment::create([
     'slot_id' => $request->slot_id,
     'appointment_date' => $request->appointment_date,
     'reason_name' => $request->reason_name,
+    'description' => $request->description,
       ]);
 
 //send email to user
@@ -112,6 +113,25 @@ Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment))
     public function restore($id){
         Appointment::withTrashed()->findOrFail($id)->restore();
         return redirect()->route('appointment.list')->with('delete_success', 'This Appointment is Store on Your New Appointment List');
+    }
+
+
+    // status update
+    public function updateStatus($id,$status){
+        $appointment=Appointment::find($id);
+        if($status === 'confirmed'){
+            $appointment->update(['status'=>$status]);
+            // Mail::to($appointment->email)->send(new AppointmentNotification($appointment));
+        }else{
+            $appointment->update(['status'=>$status]);
+        }
+        return redirect()->back();
+    }
+
+    //test report list
+    public function testreport()
+    {
+        
     }
 
 

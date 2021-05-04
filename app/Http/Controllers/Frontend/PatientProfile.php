@@ -12,7 +12,15 @@ class PatientProfile extends Controller
 {
     //
     public function profile(){
-        $appointment_list=Appointment::all();
+
+
+        //current user
+
+
+
+        $appointment_list=Appointment::where('patient_id',auth()->user()->id)->get();
+
+
         $patients_list=User::all();
         return view('frontend.partials.patientprofile.table',compact('patients_list','appointment_list'));
     }

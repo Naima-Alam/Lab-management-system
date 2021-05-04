@@ -35,6 +35,10 @@
 
                         <li><a href="{{route('labtechnical.list')}}">Labtechnical List</a></li>
 
+                    </ul> <ul class="submenu">
+
+                        <li><a href="{{ route('todayappointment.view') }}">Today Appointment List</a></li>
+
                     </ul>
                     <ul class="submenu">
 
@@ -76,22 +80,6 @@
 
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">Test Report
-                        </span>
-
-                    </a>
-                    <ul class="submenu">
-
-                        <li><a href="{{route('test.list')}}">Test List</a></li>
-
-                    </ul>
-                    <ul class="submenu">
-
-                        <li><a href="{{route('test.form')}}">Test Form</a></li>
-
-                    </ul>
 
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">

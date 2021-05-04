@@ -79,6 +79,7 @@ Route::group(['prefix' => 'admin'], function () {
 //appointment routes
 Route::group(['prefix'=> 'appointment'],function() {
     Route::get('all',[AppointmentController::class,'all'])->name('appointment.list');
+    Route::get('report',[AppointmentController::class,'testreport'])->name('testreport.list');
     Route::get('new',[AppointmentController::class,'new'])->name('appointment.new');
     Route::get('form',[AppointmentController::class,'form'])->name('appointment.form');
     Route::post('create',[AppointmentController::class,'create'])->name('appointment.create');
@@ -88,6 +89,7 @@ Route::group(['prefix'=> 'appointment'],function() {
 
     Route::get('rejected_all/{id}',[AppointmentController::class,'rejectedAll'])->name('appointment.rejectedAll');
     Route::get('restore/{id}',[AppointmentController::class,'restore'])->name('appointment.restore');
+    Route::get('{id}/{status}',[AppointmentController::class,'updateStatus'])->name('appointment.status');
 
 });
 
@@ -115,14 +117,16 @@ Route::group(['prefix' => 'labtechnical'], function () {
     Route::get('view/{id}',[LabtechnicalController::class,'view'])->name('labtechnical.view');
     Route::put('update/{id}',[LabtechnicalController::class,'update'])->name('labtechnical.update');
     Route::get('delete/{id}',[LabtechnicalController::class,'delete'])->name('labtechnical.delete');
+    Route::get('todayappointment',[LabtechnicalController::class,'todaylist'])->name('todayappointment.view');
+    Route::get('{id}/{status}',[LabtechnicalController::class,'sampleStatus'])->name('samplecollect.status');
 });
 
 //test report routes
 
 Route::group(['prefix' => 'test'], function () {
     Route::get('list',[TestReportController::class,'list'])->name('test.list');
-    Route::get('form',[TestReportController::class,'form'])->name('test.form');
-    Route::post('create',[TestReportController::class,'create'])->name('test.create');
+    Route::get('form/{id}',[TestReportController::class,'form'])->name('test.form');
+    Route::post('create/{id}',[TestReportController::class,'create'])->name('test.create');
     Route::get('edit/{id}',[TestReportController::class,'edit'])->name('test.edit');
     Route::get('view/{id}',[TestReportController::class,'view'])->name('test.view');
     Route::put('update/{id}',[TestReportController::class,'update'])->name('test.update');

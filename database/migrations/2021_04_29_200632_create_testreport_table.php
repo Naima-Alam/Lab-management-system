@@ -18,10 +18,9 @@ class CreateTestreportTable extends Migration
             $table->integer('Patient_id');
             $table->string('doctors_name');
             $table->string('test_name');
-            $table->integer('test_id');
-            $table->dateTime('test_slot');
             $table->text('image');
             $table->string('gender');
+            $table->string('prepared_by');
             $table->string('description');
 
             $table->timestamps();

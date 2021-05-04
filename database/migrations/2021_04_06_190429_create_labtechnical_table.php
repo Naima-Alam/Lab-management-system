@@ -16,11 +16,12 @@ class CreateLabtechnicalTable extends Migration
         Schema::create('labtechnical', function (Blueprint $table) {
             $table->id();
             $table->string('labtechnical_name');
-            $table->text('image')->nullable();
+            $table->text('image');
             $table->string('labtechnical_id');
+            $table->string('qualification');
             $table->string('gender');
             $table->string('email');
-            $table->string('contact_no');
+            $table->integer('contact_no');
             $table->timestamps();
         });
     }

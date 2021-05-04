@@ -20,10 +20,13 @@ class CreateAppointment extends Migration
             $table->integer('patient_id');
             // $table->integer('appointment_id')->unique();;
             $table->integer('test_id');
-            $table->time('slot_id');
+            $table->integer('slot_id');
             $table->date('appointment_date');
             $table->string('reason_name')->nullable();
+            $table->string('description')->nullable();
             $table->string('status')->default('pending');
+            $table->string('test_status')->default('pending');
+
             $table->softDeletes();
             $table->timestamps();
         });

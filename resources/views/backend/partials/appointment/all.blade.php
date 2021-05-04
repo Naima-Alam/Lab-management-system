@@ -20,6 +20,7 @@
         <th>Appointment Date</th>
         <th>Briefly describe the reason for the appointment:</th>
         <th>Action</th>
+        <th>Status</th>
     </tr>
     @foreach ( $appointment as $data )
     <tr>
@@ -34,10 +35,15 @@
         <td>{{ $data->reason_name}}</td>
         <td class="text-center">
             <div class="btn-group">
-                <a class="btn btn-sm btn-success" href="{{ route('appointment.restore', $data->id) }}">Restore</a>
+                <a class="btn btn-sm btn-success" href="{{ route('appointment.status', ['id'=>$data->id,'pending']) }}">Restore</a>
                 <a class="btn btn-sm btn-danger" href="{{ route('appointment.rejectedAll', $data->id) }}">Rejected</a>
-            </div>
+
+            <td>
+                {{ $data->status }}
+            </td>
+        </div>
         <td>
+
     </tr>
 
     @endforeach

@@ -21,41 +21,20 @@ class TestReportController extends Controller
 
 
     // For Form Page
-    public function form(){
-        $doctor_deatils = Doctor::all();
-
-        $patinet = Appointment::all();
-        return view('backend.partials.test.form',compact('doctor_deatils', 'patinet'));
+    public function form($id){
+                $appointmentId=$id;
+        return view('backend.partials.test.form',compact('appointmentId'));
     }
 
-    public function create (Request $request){
-        // dd($request->all());
-        // dd($request->file('image')->getClientOriginalExtension());
+    public function create (Request $request,$id){
 
-            $filename='';
-            if($request->hasFile('image')){
-                //some code here to store into directory
-                    $file = $request->file('image');
-
-                    if ($file->isValid()) {
-                        $filename =date('Ymdhms').'.'.$file->getClientOriginalExtension();
-    //                    dd($filename);
-                        $file->storeAs('test', $filename);
-                    }
-            }
-
-            TestReport::create([
-            'Patient_id'=>$request->Patient_id,
-            'doctors_name'=>$request->doctors_name,
-            'test_name'=>$request->test_name,
-            'test_id'=>$request->test_id,
-            'image'=>$filename,
-            'test_slot'=>$request->test_slot,
-            'gender'=>$request->gender,
-            'description'=>$request->description,
-
+        $appointment=Appointment::find($id);
+        $appointment->update([
+            'description'=>$request->description
         ]);
-        return redirect()->route('test.list');
+
+
+        return redirect()->back();
     }
 
 
@@ -94,9 +73,8 @@ class TestReportController extends Controller
         'Patient_id'=>$request->Patient_id,
         'doctor_Name'=>$request->doctor_Name,
         'test_name'=>$request->test_name,
-        'test_id'=>$request->test_id,
+        'prepared_by'=>$request->prepared_by,
         'image'=>$filename,
-        'test_slot'=>$request->test_slot,
         'gender'=>$request->gender,
         'description'=>$request->description,
         ]);

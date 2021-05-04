@@ -2,13 +2,35 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use App\Models\Labtechnical;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
 
 class LabtechnicalController extends Controller
 
 {
+
+    public function todaylist()
+    {
+        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')
+        // ->where('status','confirmed')
+        ->whereDate('appointment_date',Carbon::today())
+        ->paginate(3);
+
+
+
+
+
+        // dd($appointment);
+
+        return view('backend.partials.labtechnical.todayappointment',compact('appointment'));
+    }
+
+
+
+
     // For List
     public function list(){
         $labtechnical = Labtechnical::paginate(1);
@@ -40,6 +62,7 @@ class LabtechnicalController extends Controller
 
             Labtechnical::create([
             'labtechnical_name'=>$request->labtechnical_name,
+            'qualification'=>$request->qualification,
             'image'=>$filename,
             'labtechnical_id'=>$request->labtechnical_id,
             'gender' =>$request->gender,
@@ -83,6 +106,7 @@ public function delete($id){
         }
         Labtechnical::findOrFail($id)->update([
             'labtechnical_name'=>$request->labtechnical_name,
+            'qualification'=>$request->qualification,
             'image'=>$filename,
             'labtechnical_id'=>$request->labtechnical_id,
             'gender' =>$request->gender,
@@ -92,5 +116,16 @@ public function delete($id){
         ]);
 
         return redirect()->route('labtechnical.list');
+    }
+
+//status
+    public function sampleStatus($id,$status){
+        $labtechnical=Appointment::find($id);
+        if($status === 'confirmed'){
+            $labtechnical->update(['status'=>$status]);
+        }else{
+            $labtechnical->update(['status'=>$status]);
+        }
+        return redirect()->back();
     }
 }

@@ -6,7 +6,7 @@
     <div class="col-lg-10 col-md-7 col-sm-7 col-xs-8">
         <div class="card">
             <div class="header">
-                <h2>Labtechnical Registration Form</h2>
+                <h2>Labtechnican Registration Form</h2>
                 <ul class="header-dropdown m-r--5">
                 </ul>
             </div>
@@ -17,19 +17,26 @@
 
                     <div class="form-group form-float">
                         <div class="form-line">
-                            <label class="form-label">Labtechnical Name</label>
+                            <label class="form-label">Labtechnican Name</label>
                             <input type="text" class="form-control" name="labtechnical_name" value="{{ $labtechnical->labtechnical_name }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group form-float">
+                        <div class="form-line">
+                            <label class="form-label">Labtechnican Qualification</label>
+                            <input type="text" class="form-control" name="qualification" value="{{ $labtechnical->qualification }}">
                         </div>
                     </div>
                     <div class="form-group form-float">
                         <div class="form-line">
-                            <label class="form-label">Labtechnical ID</label>
+                            <label class="form-label">Labtechnican ID</label>
                             <input type="text" class="form-control" name="labtechnical_id" value="{{ $labtechnical->labtechnical_id }}">
                         </div>
                     </div>
                     <div class="form-group form-float">
                         <div class="form-line">
-                            <label class="form-label">Labtechnical Email</label>
+                            <label class="form-label">Labtechnican Email</label>
                             <input type="email" class="form-control" name="email" value="{{ $labtechnical->email}}">
                         </div>
                     </div>
@@ -41,7 +48,7 @@
 
                     <div class="form-group form-float">
                         <div class="form-line">
-                            <label class="form-label">Labtechnical image</label>
+                            <label class="form-label">Labtechnican image</label>
                             <input type="file" class="form-control" name="image" value="{{ $labtechnical->image }}">
                         </div>
                         <div class="form-group">

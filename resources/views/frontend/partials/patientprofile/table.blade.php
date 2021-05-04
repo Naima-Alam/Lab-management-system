@@ -68,6 +68,7 @@
                     <th scope="col">Appointment Date</th>
                     <th scope="col">Doctor Name</th>
                     <th scope="col">Consultation time</th>
+                    <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,6 +80,7 @@
                     <td>{{ $data->appointment_date }}</td>
                     <td>{{ $data->appointmentDoctor->doctors_name }}</td>
                     <td>{{ $data->slot_id }}</td>
+                    <td>{{ $data->status }}</td>
                 </tr>
                 @endforeach
 

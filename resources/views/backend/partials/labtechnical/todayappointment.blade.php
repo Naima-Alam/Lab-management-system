@@ -9,7 +9,7 @@
     </button>
 </div>
 @endif
-<h2>New Information Table</h2>
+<h2>Today Appointment Table</h2>
 <table class="table table-bordered my-4">
     <tr>
         <th>Doctors Name</th>
@@ -41,22 +41,28 @@
 
         <td class="text-center">
             <div class="btn-group btn-sm">
-                <a class="btn btn-sm btn-primary" href="{{  route('appointment.view',$data->id) }}">View</a>
+                <a class="btn btn-sm btn-primary" href="{{  route ('appointment.view',$data->id) }}">View</a>
+@if($data->status=='confirmed')
+                <a class="btn btn-sm btn-success"
+                    href="{{ route('samplecollect.status',['id'=>$data->id, 'status'=>'collected']) }}">Collected</a>
+                    @endif
 
-                <a class="btn btn-sm btn-success" href="{{ route('appointment.status',['id'=>$data->id, 'status'=>'confirmed']) }}">Accepted</a>
-                
-                <a class="btn btn-sm btn-danger" href="{{ route('appointment.rejected', $data->id) }}">Rejected</a>
+                    @if($data->status=='collected')
+                    <a class="btn btn-sm btn-success"
+                    href="{{route('test.form',$data->id)}}">Submit Report</a>
+                    @endif
 
-            {{--</div>
-            <td class="text-center">
-            <div class="btn-group btn-sm">
-             <a class="btn btn-sm btn-danger" href="{{ route('appointment.status', $data->id) }}">Status</a>
-             </div>--}}
+            </div>
 
-             <td>
-                 {{ $data->status }}
-             </td>
 
+
+        <td>
+            {{ $data->status }}
+        </td>
+
+        <td>
+            {{ $data->status }}
+        </td>
     </tr>
 
     @endforeach

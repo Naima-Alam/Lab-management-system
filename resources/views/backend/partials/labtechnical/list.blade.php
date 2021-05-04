@@ -13,11 +13,11 @@
 
 <table class="table table-bordered my-4">
     <tr>
-        <th>Labtechnical Name</th>
+        <th>Labtechnican Name</th>
         <th>Image</th>
-        <th>Labtechnical Id</th>
+        <th>Labtechnican Id</th>
         <th>Gender</th>
-        <th>Labtechnical Email</th>
+        <th>Labtechnican Email</th>
         <th>Contact No</th>
         <th>Action</th>
     </tr>
