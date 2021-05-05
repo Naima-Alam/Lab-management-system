@@ -36,7 +36,8 @@
         <!-- MENU LINKS -->
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#top" class="smoothScroll">Home</a></li>
+
+                <li><a href="{{ route('website') }}" class="smoothScroll">Home</a></li>
                 <li><a href="{{ route('about.info') }}" class="smoothScroll">About Us</a></li>
                 <li class="m_nav_item menu__item dropdown">
                 <li><a href="{{ route('department') }}" class="smoothScroll">Department</a></li>
@@ -44,12 +45,12 @@
                 <li><a href="{{ route('news') }}" class="smoothScroll">News</a></li>
                 <li><a href="{{ route('contact.info') }}" class="smoothScroll">Contact</a></li>
                 @auth()
-                   
+
                     <li><a href="{{ route('profile',) }}" class="smoothScroll">{{ auth()->user()->name }}</a></li>
                     <a href="{{ route('logout') }}">Logout</a>
                 @else
                     <li><a href="{{ route('login.form') }}" class="smoothScroll">Login</a></li>
-                    <li><a href="{{ route('registration.form') }}">Registration</a></li>
+
                 @endauth
 
                 @auth

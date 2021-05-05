@@ -24,7 +24,8 @@
                                         <div class="form-line">
                                             <label class="form-label">Form Time</label>
                                             <input type="time" class="form-control" name="form_time">
-                                        </div><div class="form-line">
+                                        </div>
+                                        <div class="form-line">
                                             <label class="form-label">To Time</label>
                                             <input type="time" class="form-control" name="to_time">
                                         </div>

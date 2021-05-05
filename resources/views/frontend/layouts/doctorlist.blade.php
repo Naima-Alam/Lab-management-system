@@ -1,5 +1,6 @@
 @include('frontend.partials.header')
     <!-- TEAM -->
+    <a class="list-item" href="{{ route('website') }}"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home</a>
     <section id="team" data-stellar-background-ratio="1">
         <div class="container">
             <div class="row">

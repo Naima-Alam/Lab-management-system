@@ -18,7 +18,7 @@ class AppointmentController extends Controller
     // For All
     public function all()
     {
-        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->with('appointmentSlot')->where('status','confirmed')->paginate(1); //for paginate
+        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->with('appointmentSlot')->where('status', 'confirmed')->paginate(1); //for paginate
         $total_user = User::count();
         return view('backend.partials.appointment.all', compact('appointment', 'total_user'));
     }
@@ -27,7 +27,7 @@ class AppointmentController extends Controller
     public function new()
     {
         //dd($appointment);
-        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->where('status','pending')->paginate(3); //for paginate
+        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->where('status', 'pending')->paginate(3); //for paginate
         return view('backend.partials.appointment.new', compact('appointment'));
     }
 
@@ -37,43 +37,43 @@ class AppointmentController extends Controller
     {
         $doctor_deatils = Doctor::all(); //For Dr. name Docotr Input Filed
         $test_name = TestInformation::all(); // Test Name For Test Input Filed
-        $slots=Timeslot::all();
-        return view('frontend.layouts.appointmentform',compact('doctor_deatils','test_name','slots'));
+        $slots = Timeslot::all();
+        return view('frontend.layouts.appointmentform', compact('doctor_deatils', 'test_name', 'slots'));
     }
 
     public function create(Request $request)
     {
 
-// need to check  the appointment time are available or not
+        // need to check  the appointment time are available or not
 
-$fromDate=date("Y-m-d",strtotime($request->appointment_date));
+        $fromDate = date("Y-m-d", strtotime($request->appointment_date));
 
-$checkAppointment=Appointment::where('doctors_id',$request->doctors_id)
-->whereDate('appointment_date',$fromDate)
-->where('slot_id', $request->slot_id)
-// ->where('test_id', $request->test_id)
-->get();
+        $checkAppointment = Appointment::where('doctors_id', $request->doctors_id)
+            ->whereDate('appointment_date', $fromDate)
+            ->where('slot_id', $request->slot_id)
+            // ->where('test_id', $request->test_id)
+            ->get();
 
-if($checkAppointment->count()==0)
-{
+        if ($checkAppointment->count() == 0) {
 
-$appointment=Appointment::create([
-    'doctors_id' => $request->doctors_id,
-    'patient_id' => auth()->user()->id,
-    'test_id' => $request->test_id,
-    'slot_id' => $request->slot_id,
-    'appointment_date' => $request->appointment_date,
-    'reason_name' => $request->reason_name,
-    'description' => $request->description,
-      ]);
+            $appointment = Appointment::create([
+                'doctors_id' => $request->doctors_id,
+                'patient_id' => auth()->user()->id,
+                'test_id' => $request->test_id,
+                'slot_id' => $request->slot_id,
+                'appointment_date' => $request->appointment_date,
+                'reason_name' => $request->reason_name,
+                'description' => $request->description,
+                'cancle_reason' => $request->cancle_reason,
+            ]);
 
-//send email to user
-Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment));
+            //send email to user
+            Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment));
 
 
-   return redirect()->back()->with('message','Appointment create successful');
-   }else
-   return redirect()->back()->with('message','Allready Booked');
+            return redirect()->back()->with('message', 'Appointment create successful');
+        } else
+            return redirect()->back()->with('message', 'Allready Booked');
     }
 
 
@@ -100,30 +100,34 @@ Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment))
     }
 
 
-    public function rejected($id){
+    public function rejected($id)
+    {
         Appointment::withTrashed()->findOrFail($id)->forceDelete();
         return redirect()->route('appointment.new')->with('delete_success', 'This Appointment is Permanently Deleted on Your New Appointment List');
     }
 
-    public function rejectedAll($id){
+    public function rejectedAll($id)
+    {
         Appointment::withTrashed()->findOrFail($id)->forceDelete();
         return redirect()->route('appointment.list')->with('delete_success', 'This Appointment is Permanently Deleted on Your All Appointment List');
     }
 
-    public function restore($id){
+    public function restore($id)
+    {
         Appointment::withTrashed()->findOrFail($id)->restore();
         return redirect()->route('appointment.list')->with('delete_success', 'This Appointment is Store on Your New Appointment List');
     }
 
 
     // status update
-    public function updateStatus($id,$status){
-        $appointment=Appointment::find($id);
-        if($status === 'confirmed'){
-            $appointment->update(['status'=>$status]);
+    public function updateStatus($id, $status)
+    {
+        $appointment = Appointment::find($id);
+        if ($status === 'confirmed') {
+            $appointment->update(['status' => $status]);
             // Mail::to($appointment->email)->send(new AppointmentNotification($appointment));
-        }else{
-            $appointment->update(['status'=>$status]);
+        } else {
+            $appointment->update(['status' => $status]);
         }
         return redirect()->back();
     }
@@ -131,17 +135,62 @@ Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment))
     //test report list
     public function testreport()
     {
-      $appointment_list=Appointment::where('patient_id',auth()->user()->id)->get();
-      $patients_list=User::all();
-      return view('backend.partials.appointment.apppointmentreport',compact('appointment_list','patients_list'));
+        $appointment_list = Appointment::where('patient_id', auth()->user()->id)->get();
+        $patients_list = User::all();
+        return view('backend.partials.appointment.apppointmentreport', compact('appointment_list', 'patients_list'));
     }
 
 
+    public function testform($id)
+    {
+        $appointmentId = $id;
+        return view('backend.partials.test.form', compact('appointmentId'));
+    }
+
+    public function testcreate(Request $request, $id)
+    {
+
+        $appointment = Appointment::find($id);
+        $appointment->update([
+            'description' => $request->description
+        ]);
+
+
+        return redirect()->back();
+    }
+
+
+    public function cancleform($id)
+    {
+        $appointmentId = $id;
+        $appointment = Appointment::find($id);
+        //dd($appointment);
+        return view('backend.partials.appointment.cancle', compact('appointment','appointmentId'));
+    }
+
+    public function canclecreate(Request $request, $id)
+    {
+
+        $appointment = Appointment::find($id);
+        $appointment->update([
+            'cancle_reason' => $request->cancle_reason,
+            'status'=>'cancel'
+        ]);
+
+
+        return redirect()->route('profile');
+    }
+   //status
+
+
+    public function sampleStatus($id,$status){
+      $appointment=Appointment::find($id);
+      if($status === 'cancle'){
+           $appointment->update(['status'=>$status]);
+       }else{
+           $appointment->update(['status'=>$status]);
+      }
+        return redirect()->back();
+   }
+
 }
-
-
-
-
-
-
-

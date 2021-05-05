@@ -15,4 +15,11 @@ class Timeslot extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+
+            'form_time'=>'datetime',
+            'to_time'=>'datetime'
+
+    ];
+
 }

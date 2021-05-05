@@ -1,5 +1,6 @@
 @include('frontend.partials.header')
-<<section id="login" data-stellar-background-ratio="3">
+<a class="list-item" href="{{ route('website') }}"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home</a>
+<section id="login" data-stellar-background-ratio="3">
     <div class="container">
         <div class="row">
 
@@ -38,9 +39,14 @@
                            placeholder="Enter Patient Password">
                 </div>
 
-                <button type="submit" class="btn btn-success">Register</button>
-
+                
+                <input class="btn btn-lg btn-success btn-block" type="submit" value="Register">
             </form>
+            <p class="text-center" style="margin-top:10px;">OR</p>
+
+              <br>
+              <p class="text-center"><a href="{{ route('login.form') }}">Already have an account?</a></p>
+          </fieldset>
         </div>
         <div class="col-md-2">
 

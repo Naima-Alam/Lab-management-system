@@ -8,22 +8,22 @@
 
                         <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
                     </a>
+{{--
+            <li class="dropdown">
+                <a href="javascript:;" class="dropdown-toggle">
+                    <span class="micon dw dw-edit2"></span><span class="mtext">Patient</span>
+                </a>
+                <ul class="submenu">
 
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle">
-                        <span class="micon dw dw-edit2"></span><span class="mtext">Patient</span>
-                    </a>
-                    <ul class="submenu">
+                    <li><a href="{{route('patient.form')}}">Patient Form</a></li>
 
-                        <li><a href="{{route('patient.form')}}">Patient Form</a></li>
+                </ul>
+                <ul class="submenu">
 
-                    </ul>
-                    <ul class="submenu">
+                    <li><a href="{{route('patient.list')}}">Patient List</a></li>
 
-                        <li><a href="{{route('patient.list')}}">Patient List</a></li>
-
-                    </ul>
-                </li>
+                </ul>
+            </li>--}}
 
                 </li>
                 <li class="dropdown">

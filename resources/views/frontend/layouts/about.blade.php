@@ -1,5 +1,5 @@
 @include('frontend.partials.header')
-
+<a class="list-item" href="{{ route('website') }}"><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home</a>
 <section id="about">
     <div class="container">
         <div class="row">

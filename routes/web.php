@@ -89,7 +89,15 @@ Route::group(['prefix'=> 'appointment'],function() {
 
     Route::get('rejected_all/{id}',[AppointmentController::class,'rejectedAll'])->name('appointment.rejectedAll');
     Route::get('restore/{id}',[AppointmentController::class,'restore'])->name('appointment.restore');
+    Route::get('cancleform/{id}',[AppointmentController::class,'cancleform'])->name('cancle.form');
     Route::get('{id}/{status}',[AppointmentController::class,'updateStatus'])->name('appointment.status');
+
+    Route::post('/canclecreate/{id}',[AppointmentController::class,'canclecreate'])->name('canclecreate.form');
+    //report
+    Route::get('test/form/{id}',[AppointmentController::class,'testform'])->name('test.form');
+    Route::post('test/create/{id}',[AppointmentController::class,'testcreate'])->name('test.create');
+
+    Route::get('cancle/{id}/{status}',[AppointmentController::class,'cancleStatus'])->name('cancle.status');
 
 });
 
@@ -125,8 +133,8 @@ Route::group(['prefix' => 'labtechnical'], function () {
 
 Route::group(['prefix' => 'test'], function () {
     Route::get('list',[TestReportController::class,'list'])->name('test.list');
-    Route::get('form/{id}',[TestReportController::class,'form'])->name('test.form');
-    Route::post('create/{id}',[TestReportController::class,'create'])->name('test.create');
+  //  Route::get('form/{id}',[TestReportController::class,'form'])->name('test.form');
+  //  Route::post('create/{id}',[TestReportController::class,'create'])->name('test.create');
     Route::get('edit/{id}',[TestReportController::class,'edit'])->name('test.edit');
     Route::get('view/{id}',[TestReportController::class,'view'])->name('test.view');
     Route::put('update/{id}',[TestReportController::class,'update'])->name('test.update');

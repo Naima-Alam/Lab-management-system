@@ -58,7 +58,7 @@
     {{-- end of patient profile information --}}
 
     {{-- patient Appontment information Table --}}
-    <form action="">
+    <form action="" style="padding: 80px" >
         <table class="table">
             <thead>
                 <tr>
@@ -70,6 +70,7 @@
                     <th scope="col">Consultation time</th>
                     <th scope="col">Status</th>
                     <th scope="col">Test Report</th>
+                    <th scope="col">Cancle Appointment</th>
                 </tr>
             </thead>
             <tbody>
@@ -80,11 +81,16 @@
                     <td>{{ $data->patient_id }}</td>
                     <td>{{ $data->appointment_date }}</td>
                     <td>{{ $data->appointmentDoctor->doctors_name }}</td>
-                    <td>{{ $data->slot_id }}</td>
+                    <td>{{ $data->appointmentSlot->form_time->format('h:i:s A')}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
                     <td>{{ $data->status }}</td>
                     <td class="text-center">
                         <a class="btn btn-sm btn-primary"  href="{{ route('testreport.list',$data->id)}}">View</a>
+
+                        @if($data->status=='pending')
+                    </td>  <td class="text-center">
+                        <a class="btn btn-sm btn-danger"  href="{{ route('cancle.form',$data->id)}}">Cancle</a>
                     </td>
+                    @endif
                 </tr>
                 @endforeach
 

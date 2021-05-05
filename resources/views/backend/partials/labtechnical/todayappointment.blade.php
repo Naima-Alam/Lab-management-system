@@ -42,7 +42,7 @@
         <td class="text-center">
             <div class="btn-group btn-sm">
                 <a class="btn btn-sm btn-primary" href="{{  route ('appointment.view',$data->id) }}">View</a>
-@if($data->status=='confirmed')
+        @if($data->status=='confirmed')
                 <a class="btn btn-sm btn-success"
                     href="{{ route('samplecollect.status',['id'=>$data->id, 'status'=>'collected']) }}">Collected</a>
                     @endif
