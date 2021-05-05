@@ -27,7 +27,7 @@
                 <td>{{ $data->patient_id }}</td>
                 <td>{{ $data->appointment_date }}</td>
                 <td>{{ $data->appointmentDoctor->doctors_name }}</td>
-                <td>{{ $data->appointmentSlot->form_time}}-{{ $data->appointmentSlot->to_time}}</td>
+                <td>{{ $data->appointmentSlot->form_time->format('h:i:s A')}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
                 <td>{{ $data->description }}</td>
             </tr>
             @endforeach

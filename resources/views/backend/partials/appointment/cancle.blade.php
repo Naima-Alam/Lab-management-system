@@ -18,8 +18,8 @@
                     <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
                         @csrf
                         <div class="form-group">
-                            <label for="form-label">Briefly describe the reason for the cancle appointment:</label>
-                            <input type="text" class="form-control" name="cancle_reason" id="cancle_reason">
+                            <label for="form-label">Briefly describe the reason for the cancel appointment:</label>
+                            <input type="text" class="form-control" name="cancel_reason" id="cancel_reason">
                           </div>
 
                         <br>

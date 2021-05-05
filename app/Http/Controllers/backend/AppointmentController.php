@@ -64,7 +64,7 @@ class AppointmentController extends Controller
                 'appointment_date' => $request->appointment_date,
                 'reason_name' => $request->reason_name,
                 'description' => $request->description,
-                'cancle_reason' => $request->cancle_reason,
+                'cancel_reason' => $request->cancel_reason,
             ]);
 
             //send email to user
@@ -173,7 +173,7 @@ class AppointmentController extends Controller
 
         $appointment = Appointment::find($id);
         $appointment->update([
-            'cancle_reason' => $request->cancle_reason,
+            'cancel_reason' => $request->cancel_reason,
             'status'=>'cancel'
         ]);
 
@@ -183,14 +183,14 @@ class AppointmentController extends Controller
    //status
 
 
-    public function sampleStatus($id,$status){
-      $appointment=Appointment::find($id);
-      if($status === 'cancle'){
-           $appointment->update(['status'=>$status]);
-       }else{
-           $appointment->update(['status'=>$status]);
-      }
-        return redirect()->back();
-   }
+    //public function sampleStatus($id,$status){
+     // $appointment=Appointment::find($id);
+     // if($status === 'cancle'){
+      //     $appointment->update(['status'=>$status]);
+      // }else{
+      //     $appointment->update(['status'=>$status]);
+      //}
+       // return redirect()->back();
+   //}
 
 }

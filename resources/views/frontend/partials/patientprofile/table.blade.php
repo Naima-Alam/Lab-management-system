@@ -88,7 +88,7 @@
 
                         @if($data->status=='pending')
                     </td>  <td class="text-center">
-                        <a class="btn btn-sm btn-danger"  href="{{ route('cancle.form',$data->id)}}">Cancle</a>
+                        <a class="btn btn-sm btn-danger"  href="{{ route('cancle.form',$data->id)}}">Cancel</a>
                     </td>
                     @endif
                 </tr>

@@ -34,7 +34,7 @@
             {{ $data->appointmentTest->test_name}}
             @endisset
         </td>
-        <td>{{ $data->slot_id}}</td>
+        <td>{{ $data->appointmentSlot->form_time->format('h:i:s A')}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
         <td>{{ $data->appointment_date}}</td>
         <td>{{ $data->reason_name}}</td>
 
