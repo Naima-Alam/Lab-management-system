@@ -64,7 +64,8 @@ class AppointmentController extends Controller
                 'appointment_date' => $request->appointment_date,
                 'reason_name' => $request->reason_name,
                 'description' => $request->description,
-                'cancel_reason' => $request->cancel_reason,
+                'description' => $request->description,
+                'serial_number' => $request->serial_number,
             ]);
 
             //send email to user
@@ -174,23 +175,37 @@ class AppointmentController extends Controller
         $appointment = Appointment::find($id);
         $appointment->update([
             'cancel_reason' => $request->cancel_reason,
-            'status'=>'cancel'
+            'status'=>'confirmed'
         ]);
 
 
         return redirect()->route('profile');
     }
-   //status
+   //appointment serial number
 
 
-    //public function sampleStatus($id,$status){
-     // $appointment=Appointment::find($id);
-     // if($status === 'cancle'){
-      //     $appointment->update(['status'=>$status]);
-      // }else{
-      //     $appointment->update(['status'=>$status]);
-      //}
-       // return redirect()->back();
-   //}
+   public function serialform($id){
+
+    $appointmentId=$id;
+    $appointment=Appointment::find($id);
+    //dd($appointment);
+    return view('backend.partials.appointment.serialform',compact('appointment','appointmentId'));
+   }
+
+   public function serialcreate(Request $request,$id){
+    $appointment = Appointment::find($id);
+    $appointment->update([
+        'serial_number' => $request->serial_number,
+       // 'status'=>'Confirmed'
+
+
+    ]);
+    return redirect()->route('appointment.new');
+
+   }
+
+
+
+
 
 }

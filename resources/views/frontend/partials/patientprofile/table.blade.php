@@ -68,9 +68,10 @@
                     <th scope="col">Appointment Date</th>
                     <th scope="col">Doctor Name</th>
                     <th scope="col">Consultation time</th>
+                    <th scope="col">Appointment Serial Number</th>
                     <th scope="col">Status</th>
                     <th scope="col">Test Report</th>
-                    <th scope="col">Cancle Appointment</th>
+                    <th scope="col">Cancel Appointment</th>
                 </tr>
             </thead>
             <tbody>
@@ -82,6 +83,7 @@
                     <td>{{ $data->appointment_date }}</td>
                     <td>{{ $data->appointmentDoctor->doctors_name }}</td>
                     <td>{{ $data->appointmentSlot->form_time->format('h:i:s A')}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
+                    <td>{{ $data->serial_number }}</td>
                     <td>{{ $data->status }}</td>
                     <td class="text-center">
                         <a class="btn btn-sm btn-primary"  href="{{ route('testreport.list',$data->id)}}">View</a>

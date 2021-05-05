@@ -18,7 +18,7 @@ class CreateAppointment extends Migration
             $table->integer('doctors_id');
 
             $table->integer('patient_id');
-            // $table->integer('appointment_id')->unique();;
+            $table->integer('serial_number')->nullable();
             $table->integer('test_id');
             $table->integer('slot_id');
             $table->date('appointment_date');

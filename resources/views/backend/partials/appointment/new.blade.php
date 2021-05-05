@@ -34,7 +34,7 @@
             {{ $data->appointmentTest->test_name}}
             @endisset
         </td>
-        <td>{{ $data->appointmentSlot->form_time->format('h:i:s A')}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
+        <td>{{ $data->appointmentSlot->form_time}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
         <td>{{ $data->appointment_date}}</td>
         <td>{{ $data->reason_name}}</td>
 
@@ -42,6 +42,8 @@
         <td class="text-center">
             <div class="btn-group btn-sm">
                 <a class="btn btn-sm btn-primary" href="{{  route('appointment.view',$data->id) }}">View</a>
+
+                <a class="btn btn-secondary" href="{{  route('serialnumber.form',$data->id) }}">serial Numbe</a>
 
                 <a class="btn btn-sm btn-success" href="{{ route('appointment.status',['id'=>$data->id, 'status'=>'confirmed']) }}">Accepted</a>
 

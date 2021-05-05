@@ -98,6 +98,8 @@ Route::group(['prefix'=> 'appointment'],function() {
     Route::post('test/create/{id}',[AppointmentController::class,'testcreate'])->name('test.create');
 
     Route::get('cancle/{id}/{status}',[AppointmentController::class,'cancleStatus'])->name('cancle.status');
+    Route::get('serial/number/form/{id}',[AppointmentController::class,'serialform'])->name('serialnumber.form');
+    Route::post('serial/number/creat/{id}',[AppointmentController::class,'serialcreate'])->name('serial_number.creat');
 
 });
 
