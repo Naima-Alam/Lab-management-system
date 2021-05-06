@@ -16,12 +16,12 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                <img width="150px" src="{{url('/uploads/user/'.auth()->user()->image)}}" alt="Admin"
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ auth()->user()->name }}</h4>
-                                    <p class="text-secondary mb-1">Full Stack Developer</p>
-                                    <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                    <p class="text-secondary mb-1">{{ auth()->user()->address }}</p>
+                                    <p class="text-muted font-size-sm">{{ auth()->user()->contact_no }}</p>
                                 </div>
                             </div>
                         </div>

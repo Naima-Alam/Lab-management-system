@@ -12,12 +12,12 @@ use App\Models\TestReport;
 class TestReportController extends Controller
 {
     // For List
-    public function list(){
+   // public function list(){
 
-        $test = TestReport::with('testDoctor')->paginate(1);
+    //    $test = TestReport::with('testDoctor')->paginate(1);
         //dd($test);
-        return view('backend.partials.test.list',compact('test'));
-    }
+    //    return view('backend.partials.test.list',compact('test'));
+   // }
 
 
     // For Form Page
@@ -27,10 +27,18 @@ class TestReportController extends Controller
     }
 
     public function create (Request $request,$id){
+        $filename = '';
+        $file = $request->file('image');
+
+        if ($request->hasFile('image') && $file->isValid()) {
+                $filename = date('Ymdhms') . '.' .$file->getClientOriginalExtension();
+                $file->storeAs('appointment', $filename);
+        }
 
         $appointment=Appointment::find($id);
         $appointment->update([
-            'description'=>$request->description
+            'description'=>$request->description,
+            'image'=>$filename,
         ]);
 
 
@@ -38,48 +46,9 @@ class TestReportController extends Controller
     }
 
 
-    // For show
-    public function view($id){
-        $test= TestReport::find($id);
-        return view('backend.partials.test.view',compact('test'));
-    }
 
 
-    //  For Edit
-    public function edit($id){
-        $test = TestReport::findOrFail($id);
-        return view('backend.partials.test.edit', compact('test'));
-    }
-    //  For delete
-    public function delete($id){
-        TestReport::find($id)->delete();
-        return redirect()->route('test.list')->with('delete_success', 'Succesfully Deleted!');
-    }
 
 
-    public function update(Request $request, $id){
-        $filename='$file';
-        if($request->hasFile('image')){
-            //some code here to store into directory
-                $file = $request->file('image');
-
-                if ($file->isValid()) {
-                    $filename =date('Ymdhms').'.'.$file->getClientOriginalExtension();
-//                    dd($filename);
-                    $file->storeAs('test', $filename);
-                }
-        }
-       TestReport::findOrFail($id)->update([
-        'Patient_id'=>$request->Patient_id,
-        'doctor_Name'=>$request->doctor_Name,
-        'test_name'=>$request->test_name,
-        'prepared_by'=>$request->prepared_by,
-        'image'=>$filename,
-        'gender'=>$request->gender,
-        'description'=>$request->description,
-        ]);
-
-        return redirect()->route('test.list');
-    }
 }
 

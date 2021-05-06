@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="">Please upload product image</label>
+                        <label for="">Please upload patient image</label>
                         <input type="file" name="image" class="form-control">
                     </div>
                     <div class="form-group">

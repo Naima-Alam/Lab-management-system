@@ -43,7 +43,13 @@ class AppointmentController extends Controller
 
     public function create(Request $request)
     {
+        $filename = '';
+        $file = $request->file('image');
 
+        if ($request->hasFile('image') && $file->isValid()) {
+                $filename = date('Ymdhms') . '.' .$file->getClientOriginalExtension();
+                $file->storeAs('appointment', $filename);
+        }
         // need to check  the appointment time are available or not
 
         $fromDate = date("Y-m-d", strtotime($request->appointment_date));
@@ -66,6 +72,8 @@ class AppointmentController extends Controller
                 'description' => $request->description,
                 'description' => $request->description,
                 'serial_number' => $request->serial_number,
+                'image'=>$filename,
+
             ]);
 
             //send email to user
@@ -150,10 +158,19 @@ class AppointmentController extends Controller
 
     public function testcreate(Request $request, $id)
     {
+        $filename = '';
+        $file = $request->file('image');
+
+        if ($request->hasFile('image') && $file->isValid()) {
+                $filename = date('Ymdhms') . '.' .$file->getClientOriginalExtension();
+                $file->storeAs('appointment', $filename);
+        }
+
 
         $appointment = Appointment::find($id);
         $appointment->update([
-            'description' => $request->description
+            'description' => $request->description,
+            'image'=>$filename,
         ]);
 
 

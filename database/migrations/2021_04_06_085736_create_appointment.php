@@ -27,6 +27,7 @@ class CreateAppointment extends Migration
             $table->string('status')->default('pending');
             $table->string('test_status')->default('pending');
             $table->string('cancel_reason')->nullable();
+            $table->text('image')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

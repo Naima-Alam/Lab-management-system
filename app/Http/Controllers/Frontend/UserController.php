@@ -25,6 +25,14 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
+        $filename = '';
+        $file = $request->file('image');
+
+        if ($request->hasFile('image') && $file->isValid()) {
+                $filename = date('Ymdhms') . '.' .$file->getClientOriginalExtension();
+                $file->storeAs('user', $filename);
+
+        }
 
         $request->validate([
            'name'=>'required',
@@ -35,6 +43,11 @@ class UserController extends Controller
         User::create([
             'name'=>$request->name,
             'email'=>$request->email,
+            'address'=>$request->address,
+            'contact_no'=>$request->contact_no,
+            'age'=>$request->age,
+            'image'=>$filename,
+            'gender'=>$request->gender,
             'password'=>bcrypt($request->password)
         ]);
 

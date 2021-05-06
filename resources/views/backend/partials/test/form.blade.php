@@ -20,6 +20,10 @@
                             <label class="form-label">Test Description</label>
                             <input type="text" class="form-control" name="description" required>
                         </div>
+                        <div class="form-group">
+                            <label for="">Please patient report image</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
 
                     <button class="btn btn-primary waves-effect" type="submit">Save</button>
 

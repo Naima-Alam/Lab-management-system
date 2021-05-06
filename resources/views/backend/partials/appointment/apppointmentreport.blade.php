@@ -17,6 +17,7 @@
                 <th scope="col">Doctor Name</th>
                 <th scope="col">Consultation time</th>
                 <th scope="col">Test Information</th>
+                <th scope="col">Test Image</th>
             </tr>
         </thead>
         <tbody>
@@ -29,6 +30,7 @@
                 <td>{{ $data->appointmentDoctor->doctors_name }}</td>
                 <td>{{ $data->appointmentSlot->form_time->format('h:i:s A')}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
                 <td>{{ $data->description }}</td>
+                <td> <img width="150px" src="{{url('/uploads/appointment/'.$data->image)}}" alt=""></td>
             </tr>
             @endforeach
 
