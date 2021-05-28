@@ -58,6 +58,11 @@ Route::post('/user/password/validate',[UserController::class,'userPasswordRecove
 Route::get('/user/password/update/form/{id}',[UserController::class,'userPasswordUpdate'])->name('user.password.update');
 Route::put('/user/password/update',[UserController::class,'passwordUpdate'])->name('password.update');
 
+//user registration list
+Route::get('all',[UserController::class,'list'])->name('user.list');
+Route::get('user/profile/', [UserController::class,'view'])->name('usere.view');
+
+
 
 
 
@@ -170,15 +175,14 @@ Route::group(['prefix' => 'testinformation'], function () {
 
 
 
-Route::group(['prefix' => 'patient'], function () {
-    Route::get('list',[PatientController::class,'list'])->name('patient.list');
-    Route::get('form',[PatientController::class,'form'])->name('patient.form');
-    Route::post('create',[PatientController::class,'create'])->name('patient.create');
-    Route::get('edit/{id}',[PatientController::class,'edit'])->name('patient.edit');
-    Route::get('view/{id}',[PatientController::class,'view'])->name('patient.view');
-    Route::put('update/{id}',[PatientController::class,'update'])->name('patient.update');
-    Route::get('delete/{id}',[PatientController::class,'delete'])->name('patient.delete');
-});
+//Route::group(['prefix' => 'patient'], function () {
+  //  Route::get('list',[PatientController::class,'list'])->name('patient.list');
+  //  Route::get('form',[PatientController::class,'form'])->name('patient.form');
+   // Route::post('create',[PatientController::class,'create'])->name('patient.create');
+   // Route::get('edit/{id}',[PatientController::class,'edit'])->name('patient.edit');
+  //  Route::get('view/{id}',[PatientController::class,'view'])->name('patient.view');
+   // Route::put('update/{id}',[PatientController::class,'update'])->name('patient.update');
+   // Route::get('delete/{id}',[PatientController::class,'delete'])->name('patient.delete');});
 
 //department routes
 Route::group(['prefix' => 'department'], function () {

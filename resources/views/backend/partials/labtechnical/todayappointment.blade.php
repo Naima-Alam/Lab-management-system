@@ -55,9 +55,9 @@
         color:#fff;
     }
     </style>
-<h2>Today Appointment Table</h2>
-<table id=appointment class="table table-bordered my-4">
-    <tr>
+       <h2>Today Appointment Table</h2>
+         <table id=appointment class="table table-bordered my-4">
+         <tr>
         <th>Doctors Name</th>
         <th>Patient Name</th>
         <th>Test Name</th>
@@ -106,9 +106,7 @@
             {{ $data->status }}
         </td>
 
-        <td>
-            {{ $data->status }}
-        </td>
+
     </tr>
 
     @endforeach

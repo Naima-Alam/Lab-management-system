@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Models\User;
 use App\Models\Doctor;
+use App\Models\Appointment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\PasswordReset;
@@ -89,6 +90,7 @@ class UserController extends Controller
         return redirect()->route('website')->with('success','Logout Successful.');
     }
 
+//forget password
 
     public function userPasswordRecovery()
 
@@ -172,6 +174,20 @@ $tokenDelete=PasswordReset::where('email',$request->email)->delete();
 
 return redirect()->route('login.form')->with('success','password updated successfully. Do-Login !!!');
 
+}
+// For List
+public function list()
+{
+    $user = User::paginate(5);
+
+    //dd($doctor);
+    return view('backend.partials.TotalUser.userlist',compact('user'));
+}
+//view
+public function view($id)
+{
+    $appointment = Appointment::find($id);
+    return view('backend.partials.TotalUser.view', compact('appointment'));
 }
 
 }

@@ -43,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($appointment_list as $key=>$data)
+            @foreach ($appointment as $key=>$data)
             <tr>
                 <th scope="row">{{ $key+1 }}</th>
                 <td>{{ $data->id }}</td>

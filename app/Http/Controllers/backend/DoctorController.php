@@ -182,4 +182,6 @@ class DoctorController extends Controller
         Auth::logout();
         return redirect()->route('doctor.loginForm')->with('success', 'Logout Successful.');
     }
+
+    
 }
