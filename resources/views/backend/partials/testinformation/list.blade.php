@@ -1,8 +1,29 @@
 @extends('backend.master')
 
 @section('start')
+<style>
+    #appointment{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    #appointment td,#appointment th{
+        border: 1px solid #ddd;
+        padding: 8px
 
-<table class="table table-bordered my-4">
+    }
+    #appointment tr:nth-child(even){
+        background-color: #0bfdfd;
+    }
+    #appointment th{
+        padding-top: 17px;
+        padding-bottom: 17px;
+        text-align: left;
+        background-color: #4caf50;
+        color:#fff;
+    }
+    </style>
+<table id=appointment class="table table-bordered my-4">
     <tr>
         <th>Test Name</th>
         <th>Department ID</th>

@@ -36,7 +36,7 @@
 
                           <div class="form-group">
                             <label for="form-label">Test Name</label>
-                            <select name="test_id" class="form-control"id="test_name" >
+                            <select class="js-example-basic-multiple form-control" name="test_id[]"  multiple="multiple">
                             @foreach ($test_name as $data)
                                 <option value="{{ $data->id }}">{{ $data->test_name }}</option>
                             @endforeach

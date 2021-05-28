@@ -11,9 +11,10 @@
             </div>
 
             <div class="col-md-6 col-sm-6">
-            <form action="{{route('login')}}" method="post">
+            <form action="{{route('password.update')}}" method="post">
+                @method('PUT')
                 @csrf
-                <h1>Register Patient Log in</h1>
+                <h2>Update Password</h2>
 
                 @if ($errors->any())
                     @foreach ($errors->all() as $error)
@@ -28,27 +29,28 @@
                 @if(session()->has('successError'))
                     <div class="alert alert-danger">{{session()->get('successError')}}</div>
                 @endif
-
             <fieldset>
 
                 <div class="form-group">
-                    <label for="email">Enter Patient Email:</label>
-                    <input required class="form-control" type="email" id="email" name="email" placeholder="Enter Patient Email">
+                    <label for="email">Enter New Password:</label>
+                    <input required class="form-control" type="password" id="email" name="password" placeholder="new password">
                 </div>
 
-                <div class="form-group">
+                <input type="email" hidden name="email" value="{{$tokenCheck->email}}">
+
+                {{-- <div class="form-group">
                     <label for="password">Enter Patient Password:</label>
                     <input required class="form-control" type="password" id="password" name="password"
                            placeholder="Enter Patient Password">
-                </div>
-                <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+                </div> --}}
+                <button class="btn btn-lg btn-success btn-block" type="submit">Update Password</button>
     {{-- <buttontype="submit"class="btnbtn-success">Login</button> --}}
 
             </form><br>
-            <p class="text-center" style="margin-top:10px;">Did you forget your password ??? <br> <a href="{{route('user.password.recovery')}}">  Reset now !!!</a></p>
+            {{-- <p class="text-center" style="margin-top:10px;">Did you forget your password ??? <br> <a href="{{route('user.password.recovery')}}">  Reset now !!!</a></p>
             <p class="text-center" style="margin-top:10px;">OR</p>
 
-                   <p class="text-center"><a href="{{ route('registration.form') }}">Register for an account?</a></p>
+                   <p class="text-center"><a href="{{ route('registration.form') }}">Register for an account?</a></p> --}}
                </fieldset>
 
 

@@ -17,7 +17,7 @@ class LabtechnicalController extends Controller
         $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')
         // ->where('status','confirmed')
         ->whereDate('appointment_date',Carbon::today())
-        ->paginate(3);
+        ->paginate(5);
 
 
 
@@ -28,7 +28,21 @@ class LabtechnicalController extends Controller
         return view('backend.partials.labtechnical.todayappointment',compact('appointment'));
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->search;
 
+        if ($search) {
+            $labtechnical = Labtechnical::where('test_name', 'like', '%' . $search . '%')->paginate(3);
+        } else {
+            $labtechnical = Labtechnical::paginate(5);
+        }
+
+        // were(name=%search%)
+
+
+        return view('backend.partials.labtechnical.todayappointment', compact('labtechnical', 'search'));
+    }
 
 
     // For List

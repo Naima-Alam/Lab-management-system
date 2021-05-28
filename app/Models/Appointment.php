@@ -29,4 +29,9 @@ class Appointment extends Model
 
         return $this->belongsTo(Timeslot::class, 'slot_id', 'id'); //relation
     }
+
+    public function tests()
+    {
+        return $this->belongsToMany(TestInformation::class,'appointment_test','appointment_id','test_id');
+    }
 }

@@ -5,10 +5,13 @@ namespace App\Http\Controllers\backend;
 use App\Models\User;
 use App\Models\Doctor;
 use App\Models\Timeslot;
-use App\Models\Appointment;
-use Illuminate\Http\Request;
-use App\Models\TestInformation;
 
+use App\Models\Appointment;
+
+use Illuminate\Http\Request;
+use App\Models\AppointmentTest;
+use App\Models\TestInformation;
+use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentNotification;
@@ -18,7 +21,7 @@ class AppointmentController extends Controller
     // For All
     public function all()
     {
-        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->with('appointmentSlot')->where('status', 'confirmed')->paginate(1); //for paginate
+        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->with('appointmentSlot')->where('status', 'confirmed')->paginate(5); //for paginate
         $total_user = User::count();
         return view('backend.partials.appointment.all', compact('appointment', 'total_user'));
     }
@@ -27,7 +30,8 @@ class AppointmentController extends Controller
     public function new()
     {
         //dd($appointment);
-        $appointment = Appointment::with('appointmentDoctor')->with('appointmentTest')->where('status', 'pending')->paginate(3); //for paginate
+        $appointment = Appointment::with('appointmentDoctor')->with('tests')->where('status', 'pending')->paginate(10); //for paginate
+        // dd($appointment);
         return view('backend.partials.appointment.new', compact('appointment'));
     }
 
@@ -43,6 +47,10 @@ class AppointmentController extends Controller
 
     public function create(Request $request)
     {
+
+        // dd($request->all());
+
+
         $filename = '';
         $file = $request->file('image');
 
@@ -60,12 +68,15 @@ class AppointmentController extends Controller
             // ->where('test_id', $request->test_id)
             ->get();
 
+
+
+
         if ($checkAppointment->count() == 0) {
 
             $appointment = Appointment::create([
                 'doctors_id' => $request->doctors_id,
                 'patient_id' => auth()->user()->id,
-                'test_id' => $request->test_id,
+                'test_id' => 1,
                 'slot_id' => $request->slot_id,
                 'appointment_date' => $request->appointment_date,
                 'reason_name' => $request->reason_name,
@@ -75,6 +86,14 @@ class AppointmentController extends Controller
                 'image'=>$filename,
 
             ]);
+
+           foreach($request->input('test_id') as $id){
+                AppointmentTest::create([
+                    'test_id'=>$id,
+                    'appointment_id'=>$appointment->id,
+                    'patient_id'=>auth()->user()->id,
+                ]);
+           }
 
             //send email to user
             Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment));
@@ -177,7 +196,7 @@ class AppointmentController extends Controller
         return redirect()->back();
     }
 
-
+//cancel appointment
     public function cancleform($id)
     {
         $appointmentId = $id;
@@ -222,7 +241,24 @@ class AppointmentController extends Controller
    }
 
 
+//download pdf
+public function getAllappointment($id){
+    $appointment=Appointment::find($id);
+    return view('backend.partials.appointment.apppointmentreport',compact('appointment'));
+}
+public function downloadPDF($id)
+{
 
+    $appointment=Appointment::find($id);
+
+    //dd($appointment);
+
+    $pdf = App::make('dompdf.wrapper');
+
+    $pdf->loadview('backend.partials.appointment.pdf',compact('appointment'));
+
+    return $pdf->download('appointment.pdf');
+}
 
 
 }

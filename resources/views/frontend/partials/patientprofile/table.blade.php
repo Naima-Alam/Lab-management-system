@@ -59,7 +59,29 @@
 
     {{-- patient Appontment information Table --}}
     <form action="" style="padding: 80px" >
-        <table class="table">
+        <style>
+            #appointment{
+                font-family: Arial, Helvetica, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
+            #appointment td,#appointment th{
+                border: 1px solid #ddd;
+                padding: 8px
+
+            }
+            #appointment tr:nth-child(even){
+                background-color: #0bfdfd;
+            }
+            #appointment th{
+                padding-top: 17px;
+                padding-bottom: 17px;
+                text-align: left;
+                background-color: #4caf50;
+                color:#fff;
+            }
+            </style>
+        <table id=appointment class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -72,6 +94,7 @@
                     <th scope="col">Status</th>
                     <th scope="col">Test Report</th>
                     <th scope="col">Cancel Appointment</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -93,6 +116,9 @@
                         <a class="btn btn-sm btn-danger"  href="{{ route('cancle.form',$data->id)}}">Cancel</a>
                     </td>
                     @endif
+
+                </td>
+
                 </tr>
                 @endforeach
 

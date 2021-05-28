@@ -10,7 +10,29 @@
 </div>
 @endif
 <h2>New Information Table</h2>
-<table class="table table-bordered my-4">
+<style>
+    #appointment{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    #appointment td,#appointment th{
+        border: 1px solid #ddd;
+        padding: 8px
+
+    }
+    #appointment tr:nth-child(even){
+        background-color: #0bfdfd;
+    }
+    #appointment th{
+        padding-top: 17px;
+        padding-bottom: 17px;
+        text-align: left;
+        background-color: #4caf50;
+        color:#fff;
+    }
+    </style>
+<table id=appointment class="table table-bordered my-4">
     <tr>
         <th>Doctors Name</th>
         <th>Patient Name</th>
@@ -30,8 +52,11 @@
         <td>{{ $data->appointmentDoctor->doctors_name}}</td>
         <td>{{ $data->patient_id }}</td>
         <td>
-            @isset ($data->appointmentTest->test_name)
-            {{ $data->appointmentTest->test_name}}
+            @isset ($data->tests)
+            @foreach ($data->tests as $test )
+            {{ $test->test_name}}
+            @endforeach
+
             @endisset
         </td>
         <td>{{ $data->appointmentSlot->form_time}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>

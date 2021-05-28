@@ -9,8 +9,54 @@
     </button>
 </div>
 @endif
+
+    <div class="header-left">
+        <div class="menu-icon dw dw-menu"></div>
+        <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+        <div class="header-search">
+            <form action="{{route('today.search')}}" method="POST">
+                @csrf
+                <div class="form-group mb-0">
+                    <i class="Search"></i>
+                    <input name="search" type="text" placeholder="Search" class="form-control">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (isset($search))
+<p>
+<span class="alart alart-success">you are searching for"{{$search}},found({{count($doctor)  }})</span>
+
+</p>
+@endif
+<style>
+    #appointment{
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    #appointment td,#appointment th{
+        border: 1px solid #ddd;
+        padding: 8px
+
+    }
+    #appointment tr:nth-child(even){
+        background-color: #0bfdfd;
+    }
+    #appointment th{
+        padding-top: 17px;
+        padding-bottom: 17px;
+        text-align: left;
+        background-color: #4caf50;
+        color:#fff;
+    }
+    </style>
 <h2>Today Appointment Table</h2>
-<table class="table table-bordered my-4">
+<table id=appointment class="table table-bordered my-4">
     <tr>
         <th>Doctors Name</th>
         <th>Patient Name</th>

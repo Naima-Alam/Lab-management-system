@@ -26,7 +26,7 @@ class DoctorController extends Controller
     }
 
 
-
+//search
     public function search(Request $request)
     {
         $search = $request->search;

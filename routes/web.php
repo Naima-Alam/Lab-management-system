@@ -52,6 +52,18 @@ Route::post('/registration/create',[UserController::class,'register'])->name('re
 Route::get('/user/login',[UserController::class,'loginForm'])->name('login.form');
 Route::post('/dologin',[UserController::class,'doLogin'])->name('login');
 Route::get('/logout',[UserController::class,'logout'])->name('logout');
+
+Route::get('/user/password/recovery',[UserController::class,'userPasswordRecovery'])->name('user.password.recovery');
+Route::post('/user/password/validate',[UserController::class,'userPasswordRecoveryValidate'])->name('user.email.validate');
+Route::get('/user/password/update/form/{id}',[UserController::class,'userPasswordUpdate'])->name('user.password.update');
+Route::put('/user/password/update',[UserController::class,'passwordUpdate'])->name('password.update');
+
+
+
+
+
+
+
 //DOCTOR
 Route::get('/form',[UserController::class,'form'])->name('form');
 Route::get('/department',[HomeController::class,'department'])->name('department');
@@ -100,6 +112,9 @@ Route::group(['prefix'=> 'appointment'],function() {
     Route::get('cancle/{id}/{status}',[AppointmentController::class,'cancleStatus'])->name('cancle.status');
     Route::get('serial/number/form/{id}',[AppointmentController::class,'serialform'])->name('serialnumber.form');
     Route::post('serial/number/creat/{id}',[AppointmentController::class,'serialcreate'])->name('serial_number.creat');
+    //pdf
+    Route::get('pdf/{id}',[AppointmentController::class,'getAllappointment'])->name('pdf.download' );
+    Route::get('reports/download.pdf/{id}',[AppointmentController::class,'downloadpdf'])->name('download.pdf' );
 
 });
 
@@ -121,6 +136,7 @@ Route::group(['prefix' => 'doctor'], function () {
 
 Route::group(['prefix' => 'labtechnical'], function () {
     Route::get('list',[LabtechnicalController::class,'list'])->name('labtechnical.list');
+    Route::post('search',[LabtechnicalController::class,'search'])->name('today.search');
     Route::get('form',[LabtechnicalController::class,'form'])->name('labtechnical.form');
     Route::post('create',[LabtechnicalController::class,'create'])->name('labtechnical.create');
     Route::get('edit/{id}',[LabtechnicalController::class,'edit'])->name('labtechnical.edit');

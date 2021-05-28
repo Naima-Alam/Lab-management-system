@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Http\Controllers\Controller;
-use App\Models\Doctor;
 use App\Models\User;
+use App\Models\Doctor;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\PasswordReset;
+use App\Mail\PasswordResetMail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -86,5 +90,88 @@ class UserController extends Controller
     }
 
 
+    public function userPasswordRecovery()
+
+{
+
+return view('frontend.layouts.passRecovery');
+
+}
+
+public function userPasswordRecoveryValidate(Request $request)
+
+{
+
+$request->validate([
+
+
+    'email'=>'required|email'
+
+
+]);
+
+$userEmailValidate=User::where('email',$request->email)->first();
+
+$token = Str::random(40);
+
+
+
+if($userEmailValidate)
+{
+
+$passwordReset = PasswordReset::insert([
+
+'token'=>$token,
+'email'=>$request->email,
+
+]);
+
+Mail::to($request->email)->send(new PasswordResetMail($passwordReset,$token));
+
+return redirect()->back()->with('success','An Reset Link was sent to your Email. Please Check !!!');
+
+}else{
+
+    return redirect()->back()->with('successError','Email is Invalid. Please try again!!!');
+}
+
+
+}
+
+public function userPasswordUpdate($id)
+{
+
+
+    $tokenCheck=PasswordReset::where('token',$id)->first();
+
+    if( $tokenCheck){
+return view('frontend.layouts.updatePassword',compact('tokenCheck'));
+}else{
+
+return redirect()->route('login.form')->with('successError','Token Expired. Reset your password again');
+
+}
+
+
+
+}
+
+
+public function passwordUpdate(Request $request)
+{
+
+$update=User::where('email',$request->email)->update([
+
+'password'=>bcrypt($request->password),
+
+]);
+
+
+$tokenDelete=PasswordReset::where('email',$request->email)->delete();
+
+
+return redirect()->route('login.form')->with('success','password updated successfully. Do-Login !!!');
+
+}
 
 }
