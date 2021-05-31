@@ -15,7 +15,7 @@ class CreateDoctorTable extends Migration
     {
         Schema::create('doctor', function (Blueprint $table) {
             $table->id();
-            $table->string('doctors_name');
+            $table->string('doctors_name')->nullable();
             $table->text('image');
             $table->string('professional_degree');
             $table->string('designation');
@@ -25,7 +25,7 @@ class CreateDoctorTable extends Migration
             $table->time('visiting_hour');
             $table->string('chamber_location');
             $table->integer('contact_no');
-            $table->string('email_address');
+            $table->string('email_address')->nullable();
             $table->integer('age');
             $table->string('gender');
             $table->timestamps();

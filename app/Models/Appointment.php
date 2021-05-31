@@ -34,4 +34,15 @@ class Appointment extends Model
     {
         return $this->belongsToMany(TestInformation::class,'appointment_test','appointment_id','test_id');
     }
+    public function paymentstatus()
+    {
+
+        return $this->hasOne(Payment::class, 'appointment_id', 'id'); //
+    }
+
+    public function patient()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

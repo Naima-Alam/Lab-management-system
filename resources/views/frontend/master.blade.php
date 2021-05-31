@@ -12,4 +12,4 @@
 @yield('content')
 
 @include('frontend.partials.footer')
-{{--  @include('frontend.layouts.navbar')--}}
+{{-- @include('frontend.layouts.navbar') --}}

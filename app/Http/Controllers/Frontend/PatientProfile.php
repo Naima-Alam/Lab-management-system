@@ -15,13 +15,13 @@ class PatientProfile extends Controller
 
 
         //current user
-
+        $patients_list=User::all();
 
 
         $appointment_list=Appointment::where('patient_id',auth()->user()->id)->get();
 
 
-        $patients_list=User::all();
+
         return view('frontend.partials.patientprofile.table',compact('patients_list','appointment_list'));
     }
 

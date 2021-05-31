@@ -16,7 +16,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img width="150px" src="{{url('/uploads/user/'.auth()->user()->image)}}" alt="Admin"
+                                <img width="150px" src="{{ url('/uploads/user/' . auth()->user()->image) }}" alt="Admin"
                                     class="rounded-circle" width="150">
                                 <div class="mt-3">
                                     <h4>{{ auth()->user()->name }}</h4>
@@ -58,29 +58,33 @@
     {{-- end of patient profile information --}}
 
     {{-- patient Appontment information Table --}}
-    <form action="" style="padding: 80px" >
+    <form action="" style="padding: 80px">
         <style>
-            #appointment{
+            #appointment {
                 font-family: Arial, Helvetica, sans-serif;
                 border-collapse: collapse;
                 width: 100%;
             }
-            #appointment td,#appointment th{
+
+            #appointment td,
+            #appointment th {
                 border: 1px solid #ddd;
                 padding: 8px
-
             }
-            #appointment tr:nth-child(even){
+
+            #appointment tr:nth-child(even) {
                 background-color: #0bfdfd;
             }
-            #appointment th{
+
+            #appointment th {
                 padding-top: 17px;
                 padding-bottom: 17px;
                 text-align: left;
                 background-color: #4caf50;
-                color:#fff;
+                color: #fff;
             }
-            </style>
+
+        </style>
         <table id=appointment class="table">
             <thead>
                 <tr>
@@ -92,30 +96,41 @@
                     <th scope="col">Consultation time</th>
                     <th scope="col">Appointment Serial Number</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Test Report</th>
+                    <th scope="col">Payment Status</th>
+                    <th scope="col">Test Report </th>
                     <th scope="col">Cancel Appointment</th>
+
+
 
                 </tr>
             </thead>
             <tbody>
-                @foreach ($appointment_list as $key=>$data)
-                <tr>
-                    <th scope="row">{{ $key+1 }}</th>
-                    <td>{{ $data->id }}</td>
-                    <td>{{ $data->patient_id }}</td>
-                    <td>{{ $data->appointment_date }}</td>
-                    <td>{{ $data->appointmentDoctor->doctors_name }}</td>
-                    <td>{{ $data->appointmentSlot->form_time->format('h:i:s A')}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
-                    <td>{{ $data->serial_number }}</td>
-                    <td>{{ $data->status }}</td>
-                    <td class="text-center">
-                        <a class="btn btn-sm btn-primary"  href="{{ route('testreport.list',$data->id)}}">View</a>
+                @foreach ($appointment_list as $key => $data)
+                    <tr>
+                        <th scope="row">{{ $key + 1 }}</th>
+                        <td>{{ $data->id }}</td>
+                        <td>{{ $data->patient_id }}</td>
+                        <td>{{ $data->appointment_date }}</td>
+                        <td>{{ $data->appointmentDoctor->doctors_name }}</td>
+                        <td>{{ $data->appointmentSlot->form_time->format('h:i:s A') }}-{{ $data->appointmentSlot->to_time->format('h:i:s A') }}
+                        </td>
+                        <td>{{ $data->serial_number }}</td>
+                        <td>{{ $data->status }}</td>
+                        <td>
+                            {{ optional($data->paymentstatus)->status ?? 'unpaid' }}
+                        </td>
 
-                        @if($data->status=='pending')
-                    </td>  <td class="text-center">
-                        <a class="btn btn-sm btn-danger"  href="{{ route('cancle.form',$data->id)}}">Cancel</a>
-                    </td>
-                    @endif
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-primary" href="{{ route('testreport.list', $data->id) }}">View</a>
+                        
+                            @if ($data->status == 'pending')
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-danger" href="{{ route('cancle.form', $data->id) }}">Cancel</a>
+                        </td>
+                @endif
+
+
 
                 </td>
 

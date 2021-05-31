@@ -39,6 +39,7 @@ class TestReportController extends Controller
         $appointment->update([
             'description'=>$request->description,
             'image'=>$filename,
+            'test_status'=>'test repost submitted'
         ]);
 
 

@@ -17,13 +17,13 @@ class Doctor
      */
     public function handle(Request $request, Closure $next)
     {if (Auth::check()) {
-        if(Auth::user()->role=='doctor' || Auth::user()->role=='admin ')
+        if(Auth::user()->role=='doctor')
         {
             return $next($request);
         }else
         {
             Auth::logout();
-            return redirect()->route('doctor.login')->with('success','You are not doctor.');
+            return redirect()->route('doctor.login')->with('success','You are not Admin , oke?');
         }
 
     }else{

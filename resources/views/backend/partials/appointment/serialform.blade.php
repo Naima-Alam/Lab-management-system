@@ -12,7 +12,8 @@
                 <!-- CONTACT FORM HERE -->
 
 
-                <form action="{{route('serial_number.creat',$appointmentId)}}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('serial_number.creat', $appointmentId) }}" method="post"
+                    enctype="multipart/form-data">
 
                     <!-- SECTION TITLE -->
                     <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
@@ -20,19 +21,19 @@
                         <div class="form-group">
                             <label for="form-label">Appointment Serial Number</label>
                             <input type="text" class="form-control" name="serial_number" id="serial_number">
-                          </div>
+                        </div>
 
                         <br>
-                         <button type="submit" class="form-control" id="cf-submit" name="submit">Submit
-                                Button</button>
+                        <button type="submit" class="form-control" id="cf-submit" name="submit">Submit
+                            Button</button>
 
-                        </div>
                     </div>
-                </form>
-
             </div>
+            </form>
 
         </div>
+
+    </div>
     </div>
 </section>
 @include('frontend.partials.footer')

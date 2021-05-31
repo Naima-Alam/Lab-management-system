@@ -6,6 +6,8 @@ use App\Models\Doctor;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DoctorController extends Controller
@@ -19,12 +21,28 @@ class DoctorController extends Controller
     // For List
     public function list()
     {
-        $doctor = Doctor::paginate(5);
+        $doctor = Doctor::orderBy('id','desc')->paginate(10);
         $department_deatils = Department::all();
         //dd($doctor);
         return view('backend.partials.doctor.list', compact('doctor', 'department_deatils'));
     }
 
+    //patient appointment list
+    public function patientlist()
+    {
+        if(auth()->user()->role == 'doctor'){
+            $appointment= Appointment::with('appointmentDoctor')
+            ->where('doctors_id','=',auth()->user()->role == 'doctor')->paginate(10);
+            // $appointment = Appointment::all();
+        }else{
+            $appointment= Appointment::with('appointmentDoctor')->paginate(10);
+            // $appointment = Appointment::all();
+        }
+
+
+        //dd($doctor);
+        return view('backend.partials.doctor.appointmentview', compact('appointment', ));
+    }
 
 //search
     public function search(Request $request)
@@ -67,7 +85,7 @@ class DoctorController extends Controller
         }
 
         Doctor::create([
-            'doctors_name' => $request->doctors_name,
+             //'doctors_name' => $request->doctors_name,
             'image' => $filename,
             'professional_degree' => $request->professional_degree,
             'designation' => $request->designation,
@@ -77,10 +95,23 @@ class DoctorController extends Controller
             'visiting_hour' => $request->visiting_hour,
             'chamber_location' => $request->chamber_location,
             'contact_no' => $request->contact_no,
-            'email_address' => $request->email_address,
+            // 'email_address' => $request->email_address,
             'age' => $request->age,
             'gender' => $request->gender,
+            'doctors_name' => $request->doctors_name
         ]);
+
+        User::create([
+
+                  'name' => $request->doctors_name,
+                  'email'  => $request->email_address,
+                  'role'  => $request->role,
+                    'password' => bcrypt('654321') ,
+        ]);
+
+            //dd($data);
+
+
         return redirect()->route('doctor.list');
     }
 
@@ -183,5 +214,5 @@ class DoctorController extends Controller
         return redirect()->route('doctor.loginForm')->with('success', 'Logout Successful.');
     }
 
-    
+
 }

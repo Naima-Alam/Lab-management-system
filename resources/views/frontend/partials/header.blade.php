@@ -24,5 +24,5 @@
     <link rel="stylesheet" href="/css/tooplate-style.css">
 
 </head>
-<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
+<body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">

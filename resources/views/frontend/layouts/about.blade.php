@@ -6,8 +6,8 @@
 
             <div class="col-md-6 col-sm-6">
                 <div class="about-info">
-                    <h2 class="wow fadeInUp" data-wow-delay="0.6s">Welcome to Your <i
-                            class="fa fa-h-square"></i>ealth Center</h2>
+                    <h2 class="wow fadeInUp" data-wow-delay="0.6s">Welcome to Your <i class="fa fa-h-square"></i>ealth
+                        Center</h2>
                     <div class="wow fadeInUp" data-wow-delay="0.8s">
                         <p>Aenean luctus lobortis tellus, vel ornare enim molestie condimentum. Curabitur lacinia
                             nisi vitae velit volutpat venenatis.</p>

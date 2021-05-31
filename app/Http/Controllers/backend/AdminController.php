@@ -31,10 +31,20 @@ class AdminController extends Controller
 
         if(Auth::attempt($loginData))
         {
-            return redirect()->route('admin.dashboard')->with('success','Admin Login Success.');
+            $request->session()->regenerate();
+            if(auth()->user()->role == 'admin')
+            {
+                return redirect()->route('admin.dashboard')->with('success','Admin Login Success.');
+            }
+            elseif (auth()->user()->role == 'doctor')
+            {
+                return redirect()->route('admin.dashboard')->with('success','Doctor Login Success.');
+            }
+
+
         }
         return back()->withErrors([
-            'email' => 'Invalid Credentials.',
+            'email' => 'Invalid Credentials',
         ]);
     }
 

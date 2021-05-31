@@ -12,7 +12,8 @@
                 <!-- CONTACT FORM HERE -->
 
 
-                <form action="{{route('canclecreate.form',$appointmentId)}}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('canclecreate.form', $appointmentId) }}" method="post"
+                    enctype="multipart/form-data">
 
                     <!-- SECTION TITLE -->
                     <div class="section-title wow fadeInUp" data-wow-delay="0.4s">
@@ -20,32 +21,31 @@
                         <div class="form-group">
                             <label for="form-label">Briefly describe the reason for the cancel appointment:</label>
                             <input type="text" class="form-control" name="cancel_reason" id="cancel_reason">
-                          </div>
+                        </div>
 
                         <br>
 
 
-                           {{--
-                             @if($appointment->status=='pending')
+                        {{-- @if ($appointment->status == 'pending')
                         <a class="btn btn-sm btn-success"
                             href="{{ route('cancle.status',['id'=>$data->id, 'status'=>'cancle']) }}">Cancle</a>
                             @endif
 
-                            @if($data->status=='confirmed')
+                            @if ($data->status == 'confirmed')
                             <a class="btn btn-sm btn-success"
                             href="{{route('test.form',$data->id)}}">Submit Report</a>
-                            @endif--}}
+                            @endif --}}
 
-                            <button type="submit" class="form-control" id="cf-submit" name="submit">Submit
-                                Button</button>
+                        <button type="submit" class="form-control" id="cf-submit" name="submit">Submit
+                            Button</button>
 
-                        </div>
                     </div>
-                </form>
-
             </div>
+            </form>
 
         </div>
+
+    </div>
     </div>
 </section>
 @include('frontend.partials.footer')

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Models\User;
 use App\Models\Appointment;
 use App\Models\Labtechnical;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Carbon;
+use App\Http\Controllers\Controller;
 
 class LabtechnicalController extends Controller
 
@@ -84,6 +85,13 @@ class LabtechnicalController extends Controller
             'contact_no'=>$request->contact_no,
 
         ]);
+        User::create([
+
+            'name' => $request->labtechnical_name,
+            'email'  => $request->email,
+            'role'  => $request->role,
+              'password' => bcrypt('123123') ,
+  ]);
         return redirect()->route('labtechnical.list');
     }
 

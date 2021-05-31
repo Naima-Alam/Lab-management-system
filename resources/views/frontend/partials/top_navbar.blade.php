@@ -46,7 +46,7 @@
                 <li><a href="{{ route('contact.info') }}" class="smoothScroll">Contact</a></li>
                 @auth()
 
-                    <li><a href="{{ route('profile',) }}" class="smoothScroll">Profile</a></li>
+                    <li><a href="{{ route('profile') }}" class="smoothScroll">Profile</a></li>
                     <a href="{{ route('logout') }}">Logout</a>
                 @else
                     <li><a href="{{ route('login.form') }}" class="smoothScroll">Login</a></li>

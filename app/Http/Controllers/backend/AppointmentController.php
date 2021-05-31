@@ -4,10 +4,11 @@ namespace App\Http\Controllers\backend;
 
 use App\Models\User;
 use App\Models\Doctor;
+use App\Models\Payment;
+
 use App\Models\Timeslot;
 
 use App\Models\Appointment;
-
 use Illuminate\Http\Request;
 use App\Models\AppointmentTest;
 use App\Models\TestInformation;
@@ -30,8 +31,8 @@ class AppointmentController extends Controller
     public function new()
     {
         //dd($appointment);
-        $appointment = Appointment::with('appointmentDoctor')->with('tests')->where('status', 'pending')->paginate(10); //for paginate
-        // dd($appointment);
+        $appointment = Appointment::with('appointmentDoctor')->with('tests')->with('paymentstatus')->where('status', 'pending')->paginate(10); //for paginate
+        //dd($appointment);
         return view('backend.partials.appointment.new', compact('appointment'));
     }
 
@@ -72,7 +73,7 @@ class AppointmentController extends Controller
 
 
         if ($checkAppointment->count() == 0) {
-
+            $paymentstatus=Payment::all();
             $appointment = Appointment::create([
                 'doctors_id' => $request->doctors_id,
                 'patient_id' => auth()->user()->id,
@@ -83,6 +84,7 @@ class AppointmentController extends Controller
                 'description' => $request->description,
                 'description' => $request->description,
                 'serial_number' => $request->serial_number,
+                //'test_status' => $request->test_status,
                 'image'=>$filename,
 
             ]);
@@ -93,13 +95,14 @@ class AppointmentController extends Controller
                     'appointment_id'=>$appointment->id,
                     'patient_id'=>auth()->user()->id,
                 ]);
+
            }
 
             //send email to user
-            Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment));
+         //   Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment));
 
 
-            return redirect()->back()->with('message', 'Appointment create successful');
+            return redirect()->route('payment.form',$appointment->id)->with('message', 'Appointment create successful');
         } else
             return redirect()->back()->with('message', 'Allready Booked');
     }
@@ -190,6 +193,7 @@ class AppointmentController extends Controller
         $appointment->update([
             'description' => $request->description,
             'image'=>$filename,
+            'test_status'=>'Test Report submitted'
         ]);
 
 
@@ -251,7 +255,7 @@ public function downloadPDF($id)
 
     $appointment=Appointment::find($id);
 
-    //dd($appointment);
+
 
     $pdf = App::make('dompdf.wrapper');
 
@@ -259,6 +263,9 @@ public function downloadPDF($id)
 
     return $pdf->download('appointment.pdf');
 }
+
+
+//ap
 
 
 }

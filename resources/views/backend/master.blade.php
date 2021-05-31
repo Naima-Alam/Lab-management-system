@@ -1,5 +1,3 @@
-
-
 @include('backend.layouts.header')
 @include('backend.layouts.topbar')
 @include('backend.layouts.rightsidebar')
