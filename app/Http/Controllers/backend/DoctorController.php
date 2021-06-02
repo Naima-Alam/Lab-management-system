@@ -17,7 +17,11 @@ class DoctorController extends Controller
         $doctor_deatils = Doctor::findOrfail($id);
         return view('backend.layouts.profile', compact('doctor_deatils'));
     }
-
+    public function doctorprofile($id)
+    {
+        $doctor_deatils = Doctor::findOrfail($id);
+        return view('backend.partials.doctor.profile', compact('doctor_deatils'));
+    }
     // For List
     public function list()
     {

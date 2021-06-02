@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1 style="background-color: #ff0000">Booking Successful</h1>
+    <h1 style="background-color: #ff0000">Payment Successful</h1>
     <p>
         Appointment Date : {{ $appointmentData->slot_id }}
     </p>

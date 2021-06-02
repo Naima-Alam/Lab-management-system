@@ -130,6 +130,11 @@
                             <li><a href="{{ route('patient.list') }}">Patient Appointment List</a></li>
 
                         </ul>
+                        <ul class="submenu">
+
+                            <li><a href="{{ route('prescription.list') }}">prescription List</a></li>
+
+                        </ul>
 
                     </li>
                     <li class="dropdown">

@@ -90,7 +90,8 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Appointment ID</th>
-                    <th scope="col">Patient ID</th>
+                    <th scope="col">Patient Name</th>
+                    {{-- <th scope="col">Patient ID</th> --}}
                     <th scope="col">Appointment Date</th>
                     <th scope="col">Doctor Name</th>
                     <th scope="col">Consultation time</th>
@@ -109,7 +110,8 @@
                     <tr>
                         <th scope="row">{{ $key + 1 }}</th>
                         <td>{{ $data->id }}</td>
-                        <td>{{ $data->patient_id }}</td>
+                        <td>{{ $data->patient->name }}</td>
+                        {{-- <td>{{ $data->patient_id }}</td> --}}
                         <td>{{ $data->appointment_date }}</td>
                         <td>{{ $data->appointmentDoctor->doctors_name }}</td>
                         <td>{{ $data->appointmentSlot->form_time->format('h:i:s A') }}-{{ $data->appointmentSlot->to_time->format('h:i:s A') }}
@@ -118,11 +120,11 @@
                         <td>{{ $data->status }}</td>
                         <td>
                             {{ optional($data->paymentstatus)->status ?? 'unpaid' }}
+                            <a class="btn btn-sm btn-danger" href="{{route('payment.form',$data->id) }}">pay</a>
                         </td>
-
                         <td class="text-center">
                             <a class="btn btn-sm btn-primary" href="{{ route('testreport.list', $data->id) }}">View</a>
-                        
+
                             @if ($data->status == 'pending')
                         </td>
                         <td class="text-center">

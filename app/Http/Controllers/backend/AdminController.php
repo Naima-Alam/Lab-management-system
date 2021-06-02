@@ -47,9 +47,11 @@ class AdminController extends Controller
             'email' => 'Invalid Credentials',
         ]);
     }
-
+//dashboard
     public function dashboard(){
-        return view('backend.master');
+        //dd('doctor_deatils ');
+        $doctor_deatils = Doctor::all();
+        return view('backend.master',compact('doctor_deatils'));
     }
 
     public function logout()

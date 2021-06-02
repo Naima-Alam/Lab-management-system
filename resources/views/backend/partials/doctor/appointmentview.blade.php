@@ -72,6 +72,7 @@
             <div class="btn-group btn-sm">
                 <a class="btn btn-sm btn-primary" href="{{  route('appointment.view',$data->id) }}">View</a>
                 <a class="btn btn-sm btn-danger" href="{{ route('appointment.rejected', $data->id) }}">Rejected</a>
+                <a class="btn btn-primary" href="{{ route('prescription.form',$data->patient_id) }}">Prescription</a>
 
             {{--</div>
             <td class="text-center">

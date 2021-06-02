@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Backend\LabtechnicalController;
 use App\Http\Controllers\backend\PaymentController;
+use App\Http\Controllers\backend\PrescriptionController;
 use App\Http\Controllers\backend\TestinfoController;
 use App\Http\Controllers\backend\TimeslotController;
 use App\Http\Controllers\Frontend\PatientProfile;
@@ -28,11 +29,25 @@ use App\Http\Controllers\Profile\ProfileController;
 */
 
 Route::get('view/{id}', [DoctorController::class, 'profile'])->name('doctor.view');
+Route::get('profile/view/{id}', [DoctorController::class, 'doctorprofile'])->name('doctor.profile');
 
 
 //profile
 
 Route::get('patient/profile/', [PatientProfile::class, 'profile'])->name('profile');
+
+
+
+//prescription
+Route::group(['prefix' => 'prescription'], function () {
+    Route::get('form/{id}', [PrescriptionController::class, 'form'])->name('prescription.form');
+    Route::post('create', [PrescriptionController::class, 'create'])->name('prescription.create');
+    Route::get('view/{id}', [PrescriptionController::class, 'view'])->name('prescription.view');
+    Route::get('list', [PrescriptionController::class, 'list'])->name('prescription.list');
+
+});
+
+
 
 
 
@@ -147,7 +162,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('cancleform/{id}', [AppointmentController::class, 'cancleform'])->name('cancle.form');
         Route::get('{id}/{status}', [AppointmentController::class, 'updateStatus'])->name('appointment.status');
 
-        //Route::post('/canclecreate/{id}',[AppointmentController::class,'paymentcreate'])->name('canclecreate.form');
+        Route::post('/canclecreate/{id}',[AppointmentController::class,'canclecreate'])->name('canclecreate.form');
 
 
         Route::post('/paymentcreate/{id}', [AppointmentController::class, 'paymentcreate'])->name('paymentcreate.form');
@@ -194,7 +209,7 @@ Route::group(['prefix' => 'admin'], function () {
         });
 
 
-        //labtechnical routes
+
 
 
 
