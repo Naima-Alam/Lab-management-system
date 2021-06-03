@@ -55,6 +55,7 @@
 
                 @auth
                     <li class="appointment-btn"><a href="{{ route('appointment.form') }}">Make an appointment</a></li>
+                    {{-- <li class="smoothScroll"><a href="{{ route('prescription.view',$data->patient_id) }}">My Prescription</a></li> --}}
 
                 @endauth
 

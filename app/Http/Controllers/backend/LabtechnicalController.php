@@ -48,7 +48,7 @@ class LabtechnicalController extends Controller
 
     // For List
     public function list(){
-        $labtechnical = Labtechnical::paginate(1);
+        $labtechnical = Labtechnical::paginate(10);
         //dd($labtechnical);
         return view('backend.partials.labtechnical.list',compact('labtechnical'));
     }

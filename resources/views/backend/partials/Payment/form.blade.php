@@ -18,6 +18,8 @@
                         @csrf
                         <div>
                             <p>Appointment ID: {{ $appointment_list->id }}</p>
+
+                            <p>Total amount: {{ $total }}</p>
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">

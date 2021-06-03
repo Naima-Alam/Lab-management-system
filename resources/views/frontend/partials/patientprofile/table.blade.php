@@ -95,7 +95,8 @@
                     <th scope="col">Appointment Date</th>
                     <th scope="col">Doctor Name</th>
                     <th scope="col">Consultation time</th>
-                    <th scope="col">Appointment Serial Number</th>
+                    <th scope="col">Due Amount</th>
+                    <th scope="col">Test Name</th>
                     <th scope="col">Status</th>
                     <th scope="col">Payment Status</th>
                     <th scope="col">Test Report </th>
@@ -116,12 +117,27 @@
                         <td>{{ $data->appointmentDoctor->doctors_name }}</td>
                         <td>{{ $data->appointmentSlot->form_time->format('h:i:s A') }}-{{ $data->appointmentSlot->to_time->format('h:i:s A') }}
                         </td>
-                        <td>{{ $data->serial_number }}</td>
+                        <td>{{$data->due_amount }}</td>
+                        <td>
+                            @isset($data->tests)
+                                @foreach ($data->tests as $test)
+                                    {{ $test->test_name }}
+                                @endforeach
+
+                            @endisset
+                        </td>
                         <td>{{ $data->status }}</td>
                         <td>
+
+                            
                             {{ optional($data->paymentstatus)->status ?? 'unpaid' }}
-                            <a class="btn btn-sm btn-danger" href="{{route('payment.form',$data->id) }}">pay</a>
+
+                                <a class="btn btn-sm btn-danger" href="{{route('payment.form',$data->id) }}">pay</a>
+
+
+
                         </td>
+
                         <td class="text-center">
                             <a class="btn btn-sm btn-primary" href="{{ route('testreport.list', $data->id) }}">View</a>
 

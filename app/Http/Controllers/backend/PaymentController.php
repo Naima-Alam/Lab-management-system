@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentNotification;
+use App\Models\Test;
 
 class PaymentController extends Controller
 {
@@ -18,16 +19,32 @@ class PaymentController extends Controller
         public function form($id)
         {
 
-            $appointment_list=Appointment::find($id);
+            $appointment_list=Appointment::with('appointmentTest','tests')->find($id);
+            $total =0;
 
-            //dd($appointmentID);
-            return view('backend.partials.Payment.form',compact('appointment_list'));
+            foreach($appointment_list->tests as $key=>$test){
+                $total +=$test->test_price;
+            }
+
+            return view('backend.partials.Payment.form',compact('appointment_list','total'));
         }
 
 
 
         public function create (Request $request,$id){
-            $appointment=Appointment::find($id);
+            $appointment=Appointment::with('tests')->find($id);
+
+            $total =0;
+
+            foreach($appointment->tests as $key=>$test){
+                $total +=$test->test_price;
+
+            }
+
+           $appointment->update([
+               'due_amount' => $total - $request->amount
+           ]);
+
            $payment = Payment::create([
                 'transaction_id'=>$request->transection,
                 'appointment_id'=> $appointment->id,
@@ -36,11 +53,13 @@ class PaymentController extends Controller
                 'status'=>'paid'
             ]);
 
+
+
              //send email to user
              Mail::to(auth()->user()->email)->send(new AppointmentNotification($appointment));
 
 
-             return redirect()->back()->with('message', 'Appointment create successful');
+             return redirect()->route('profile')->with('message', 'Appointment create successful');
 
         }
 
