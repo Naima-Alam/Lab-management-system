@@ -11,4 +11,11 @@ class Doctor extends Model
     protected $table="doctor";
 
     protected $guarded = [];
+    public function doctoruser(){
+
+        return $this->belongsO(User::class, 'user_id', 'id'); //relation
+    }
+
+
+
 }

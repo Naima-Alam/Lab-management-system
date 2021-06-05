@@ -29,7 +29,7 @@ use App\Http\Controllers\Profile\ProfileController;
 */
 
 Route::get('view/{id}', [DoctorController::class, 'profile'])->name('doctor.view');
-Route::get('profile/view/{id}', [DoctorController::class, 'doctorprofile'])->name('doctor.profile');
+Route::get('profile/view', [DoctorController::class, 'doctorprofile'])->name('doctor.profile');
 
 
 //profile

@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DoctorController extends Controller
 {
@@ -17,15 +19,22 @@ class DoctorController extends Controller
         $doctor_deatils = Doctor::findOrfail($id);
         return view('backend.layouts.profile', compact('doctor_deatils'));
     }
-    public function doctorprofile($id)
+
+
+
+
+    public function doctorprofile()
     {
-        $doctor_deatils = Doctor::findOrfail($id);
-        return view('backend.partials.doctor.profile', compact('doctor_deatils'));
+
+        // dd($doctor);
+        $doctor = Doctor::where('user_id', Auth::user()->id)->first();
+
+        return view('backend.partials.doctor.profile', compact('doctor'));
     }
     // For List
     public function list()
     {
-        $doctor = Doctor::orderBy('id','desc')->paginate(10);
+        $doctor = Doctor::orderBy('id', 'desc')->paginate(10);
         $department_deatils = Department::all();
         //dd($doctor);
         return view('backend.partials.doctor.list', compact('doctor', 'department_deatils'));
@@ -34,21 +43,21 @@ class DoctorController extends Controller
     //patient appointment list
     public function patientlist()
     {
-        if(auth()->user()->role == 'doctor'){
-            $appointment= Appointment::with('appointmentDoctor')
-            ->where('doctors_id','=',auth()->user()->role == 'doctor')->paginate(10);
+        if (auth()->user()->role == 'doctor') {
+            $appointment = Appointment::with('appointmentDoctor')
+                ->where('doctors_id', '=', auth()->user()->role == 'doctor')->paginate(10);
             // $appointment = Appointment::all();
-        }else{
-            $appointment= Appointment::with('appointmentDoctor')->paginate(10);
+        } else {
+            $appointment = Appointment::with('appointmentDoctor')->paginate(10);
             // $appointment = Appointment::all();
         }
 
 
         //dd($doctor);
-        return view('backend.partials.doctor.appointmentview', compact('appointment', ));
+        return view('backend.partials.doctor.appointmentview', compact('appointment',));
     }
 
-//search
+    //search
     public function search(Request $request)
     {
         $search = $request->search;
@@ -73,7 +82,7 @@ class DoctorController extends Controller
 
     public function create(Request $request)
     {
-        // dd($request->all());
+
         // dd($request->file('image')->getClientOriginalExtension());
 
         $filename = '';
@@ -88,32 +97,48 @@ class DoctorController extends Controller
             }
         }
 
-        Doctor::create([
-             //'doctors_name' => $request->doctors_name,
-            'image' => $filename,
-            'professional_degree' => $request->professional_degree,
-            'designation' => $request->designation,
-            'specilalist_on' => $request->specilalist_on,
-            'hospital_name' => $request->hospital_name,
-            'chamber_name' => $request->chamber_name,
-            'visiting_hour' => $request->visiting_hour,
-            'chamber_location' => $request->chamber_location,
-            'contact_no' => $request->contact_no,
-            // 'email_address' => $request->email_address,
-            'age' => $request->age,
-            'gender' => $request->gender,
-            'doctors_name' => $request->doctors_name
-        ]);
+        DB::beginTransaction();
 
-        User::create([
+        try{
+            $user = User::create([
 
-                  'name' => $request->doctors_name,
-                  'email'  => $request->email_address,
-                  'role'  => $request->role,
-                    'password' => bcrypt('654321') ,
-        ]);
+                'name' => $request->doctors_name,
+                'email'  => $request->email_address,
+                'role'  => $request->role,
+                'address' => $request->chamber_location,
+                'contact_no' => $request->contact_no,
+                'age' => $request->age,
+                'image' => $filename,
+                'gender' => $request->gender,
+                'password' => bcrypt('654321'),
+            ]);
 
-            //dd($data);
+           $doctor= Doctor::create([
+                'user_id'=>$user->id,
+                'doctors_name' => $request->doctors_name,
+                'image' => $filename,
+                'professional_degree' => $request->professional_degree,
+                'designation' => $request->designation,
+                'specilalist_on' => $request->specilalist_on,
+                'hospital_name' => $request->hospital_name,
+                'chamber_name' => $request->chamber_name,
+                'visiting_hour' => $request->visiting_hour,
+                'chamber_location' => $request->chamber_location,
+                'contact_no' => $request->contact_no,
+                'email_address' => $request->email_address,
+                'age' => $request->age,
+                'gender' => $request->gender,
+                'doctors_name' => $request->doctors_name
+            ]);
+
+            DB::commit();
+        }catch(Exception $e){
+            DB::rollBack();
+
+        }
+
+
+        //dd($data);
 
 
         return redirect()->route('doctor.list');
@@ -154,7 +179,6 @@ class DoctorController extends Controller
                 $file->storeAs('doctor', $filename);
                 @unlink(public_path('uploads/doctor/' . $doctor->image));
             }
-
         } else {
             $filename = $doctor->image;
         }
@@ -217,6 +241,4 @@ class DoctorController extends Controller
         Auth::logout();
         return redirect()->route('doctor.loginForm')->with('success', 'Logout Successful.');
     }
-
-
 }

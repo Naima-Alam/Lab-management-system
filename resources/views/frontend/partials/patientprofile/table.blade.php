@@ -129,10 +129,12 @@
                         <td>{{ $data->status }}</td>
                         <td>
 
-                            
-                            {{ optional($data->paymentstatus)->status ?? 'unpaid' }}
 
-                                <a class="btn btn-sm btn-danger" href="{{route('payment.form',$data->id) }}">pay</a>
+                            {{ optional($data->paymentstatus)->status ?? 'unpaid' }}
+                           @if (optional($data->paymentstatus)->status=='')
+                            <a class="btn btn-sm btn-danger" href="{{route('payment.form',$data->id) }}">pay</a>
+                             @endif
+
 
 
 

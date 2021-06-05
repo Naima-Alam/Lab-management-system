@@ -215,7 +215,7 @@ class AppointmentController extends Controller
         $appointment = Appointment::find($id);
         $appointment->update([
             'cancel_reason' => $request->cancel_reason,
-            'status'=>'confirmed'
+            'status'=>'canceled by patient'
         ]);
 
 
@@ -259,7 +259,11 @@ public function downloadPDF($id)
 
     $pdf = App::make('dompdf.wrapper');
 
+    // return view('backend.partials.appointment.pdf',compact('appointment'));
+
     $pdf->loadview('backend.partials.appointment.pdf',compact('appointment'));
+
+
 
     return $pdf->download('appointment.pdf');
 }

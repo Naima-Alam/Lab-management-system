@@ -32,6 +32,9 @@ class PaymentController extends Controller
 
 
         public function create (Request $request,$id){
+            // $request->validate([
+            //     'amount'=> 'max:500|min:500'
+            // ]);
             $appointment=Appointment::with('tests')->find($id);
 
             $total =0;

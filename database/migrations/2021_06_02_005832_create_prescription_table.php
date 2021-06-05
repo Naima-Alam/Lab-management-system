@@ -20,7 +20,6 @@ class CreatePrescriptionTable extends Migration
             $table->string('medicine_name');
             $table->string('dosage');
             $table->string('frequency');
-
             $table->string('period');
             $table->timestamps();
         });

@@ -36,7 +36,10 @@
                         <div class="form-group form-float">
                             <div class="form-line">
                                 <label class="form-label">Amount</label>
-                                <input type="text" class="form-control" name="amount" required>
+                                <input type="number" min="500" max="500"   class="form-control" name="amount" required>
+                                @error('amount')
+                                    <b class="text-danger"> {{ $message }}</b>
+                                @enderror
                             </div>
                         </div>
                 </div>

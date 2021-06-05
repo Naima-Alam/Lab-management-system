@@ -13,15 +13,15 @@
     <meta name="author" content="Tooplate">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/animate.css">
-    <link rel="stylesheet" href="/css/owl.carousel.css">
-    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/animate.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/owl.carousel.css')}}">
+    <link rel="stylesheet" href="{{ asset('/css/owl.theme.default.min.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="/css/tooplate-style.css">
+    <link rel="stylesheet" href="{{ asset('/css/tooplate-style.css')}}">
 
 </head>
 

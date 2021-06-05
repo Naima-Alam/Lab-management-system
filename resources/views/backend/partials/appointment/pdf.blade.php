@@ -4,7 +4,8 @@
         #appointment {
             font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
-            width: 100%;
+            width: 80%;
+            font-size: 12px;
         }
         #appointment td,
         #appointment th {
@@ -12,7 +13,7 @@
             padding: 8px
         }
         #appointment tr:nth-child(even) {
-            background-color: #0bfdfd;
+            background-color: #9da7ad;
         }
         #appointment th {
             padding-top: 17px;
@@ -33,29 +34,32 @@
         </div>
         <div class="card-body">
             <div class="row mb-4">
-                <div class="col-sm-6">
-                    <h6 class="mb-3">From:</h6>
-                    <div>
-                        <strong>Diagnostic Center</strong>
+                <div class="col-md-12 d-flex" >
+                    <div class="col-sm-6" style="float: left;margin-right:10px;">
+                        <h6 class="mb-3">From:</h6>
+                        <div>
+                            <strong>Diagnostic Center</strong>
+                        </div>
+                        <div>Uttara,Dhaka</div>
+                        <div>Email: diagnostic@gmail.com</div>
+                        <div>Phone: +8801784438727</div>
                     </div>
-                    <div>Uttara,Dhaka</div>
-                    <div>71-101 Szczecin, Poland</div>
-                    <div>Email: diagnostic@gmail.com</div>
-                    <div>Phone: +8801784438727</div>
+
+                    <div class="col-sm-6" style="float: left">
+
+                        <h6 class="mb-3">To:</h6>
+                        <div>
+                            <strong>Patient ID:{{ $appointment->name }}</strong>
+                        </div>
+
+                        <div><strong>Doctor Name:{{ $appointment->appointmentDoctor->doctors_name  }}</strong>
+                        </div>
+                        <div>Email:{{ $appointment->patient->email }}</div>
+                        <div>Phone:{{ $appointment->patient->contact_no}}</div>
+                    </div>
                 </div>
 
-                <div class="col-sm-6">
-
-                    <h6 class="mb-3">To:</h6>
-                    <div>
-                        <strong>Patient ID:{{ $appointment->name }}</strong>
-                    </div>
-
-                    <div><strong>Doctor Name:{{ $appointment->appointmentDoctor->doctors_name  }}</strong>
-                    </div>
-                    <div>Email:{{ $appointment->patient->email }}</div>
-                    <div>Phone:{{ $appointment->patient->contact_no}}</div>
-                </div>
+                <div style="clear: both;"></div>
                 {{-- <div class="col-lg-4 col-sm-5 ml-auto">
                     <table class="table table-clear">
                     <tbody>
@@ -101,13 +105,9 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Appointment ID</th>
-                    {{-- <th scope="col">Patient ID</th>
-                    <th scope="col">Appointment Date</th> --}}
-                    {{-- <th scope="col">Doctor Name</th> --}}
                     <th scope="col">Consultation time</th>
                     <th scope="col">Test Information</th>
-                    {{-- <th scope="col">Test Image</th>
-                    <th scope="col">Test report pdf</th> --}}
+                    <th scope="col">Test Image</th>
                 </tr>
             </thead>
             <tbody>
@@ -117,13 +117,12 @@
                     <tr>
                         <th scope="row">1</th>
                         <td>{{ $appointment->id }}</td>
-                        {{-- <td>{{ $appointment->patient_id }}</td>
-                        <td>{{ $appointment->appointment_date }}</td> --}}
-                        {{-- <td>{{ $appointment->appointmentDoctor->doctors_name }}</td> --}}
                         <td>{{  $appointment->appointmentSlot->form_time->format('h:i:s A') }}-{{ $appointment->appointmentSlot->to_time->format('h:i:s A') }}
                         </td>
                         <td>{{ $appointment->description }}</td>
-                        {{-- <td> <img width="150px" src="{{ url('/uploads/appointment/' . $appointment->image) }}" alt="logo"></td> --}}
+                        <td>
+                            <img width="150px" src="{{ asset('/uploads/appointment/' . $appointment->image) }}" alt="">
+                        </td>
 
                     </tr>
 

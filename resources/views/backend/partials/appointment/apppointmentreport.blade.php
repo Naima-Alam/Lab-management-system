@@ -48,13 +48,12 @@
                             <strong>Diagnostic Center</strong>
                         </div>
                         <div>Uttara,Dhaka</div>
-                        <div>71-101 Szczecin, Poland</div>
                         <div>Email: diagnostic@gmail.com</div>
                         <div>Phone: +8801784438727</div>
                     </div>
 
                     <div class="col-sm-6">
-                        @foreach ($appointment_list as $key => $data)
+
                         <h6 class="mb-3">To:</h6>
                         <div>
                             <strong>Patient ID:{{ $data->patient->name,$data->id }}</strong>
@@ -65,7 +64,6 @@
                         <div>Email:{{ $data->patient->email,$data->id }}</div>
                         <div>Phone:{{ $data->patient->contact_no,$data->id }}</div>
                     </div>
-                    @endforeach
 
 
 

@@ -4,13 +4,17 @@
 
 
 <div class="row">
+    {{-- @dd($doctor); --}}
     <div class="col-10 m-auto">
         <div class="card-box pd-20 height-100-p mb-30">
             <div class="row align-items-center">
                 <div class="col-md-8">
-                    <img src="{{ asset('/uploads/doctor/' . $doctor_deatils->image) }}" alt=""
+                    <img src="{{ url('/uploads/doctor/'.$doctor->image) }}" alt="Admin"
                         class="img-fluid rounded-circle img-thumbnail" style="width: 100px; height: 100px">
+                        {{-- <img width="150px" src="{{ url('/uploads/user/' . auth()->user()->image) }}" alt="Admin"
+                                    class="rounded-circle" width="150"> --}}
                 </div>
+                @csrf
                 <div class="col-md-8">
                     <h4 class="font-20 weight-500 mb-10 text-capitalize">
                         Welcome back
@@ -21,10 +25,10 @@
                             @endisset
                         </span>
                     </h4>
-                    <p class="font-18 max-width-500 border border-radius-6 p-3">{{ $doctor_deatils->Doctor }}</p>
+                    {{-- <p class="font-18 max-width-500 border border-radius-6 p-3">{{ $doctor_deatils->Doctor }}</p> --}}
                 </div>
             </div>
-
+            {{-- @dd($doctor) --}}
             <div class="clearfix mb-20 mt-2">
                 <div class="pull-left">
                     <h3 class="text-blue h4">Your info</h3>
@@ -35,52 +39,52 @@
                 <tbody>
                     <tr>
                         <th>Name</th>
-                        <td>{{ $doctor_deatils->doctors_name }}</td>
+                        <td>{{ Auth::user()->name }}</td>
                     </tr>
                     <tr>
                         <th>Professional Degree</th>
-                        <td>{{ $doctor_deatils->professional_degree }}</td>
+                        <td>{{ $doctor->professional_degree }}</td>
                     </tr>
                     <tr>
                         <th>Designation</th>
-                        <td>{{ $doctor_deatils->designation }}</td>
+                        <td>{{ $doctor->designation }}</td>
                     </tr>
 
                     <tr>
                         <th>Specilalist On</th>
-                        <td>{{ $doctor_deatils->specilalist_on }}</td>
+                         <td>{{ $doctor->specilalist_on }}</td>
                     </tr>
                     <tr>
                         <th>Hospital Name</th>
-                        <td>{{ $doctor_deatils->hospital_name }}</td>
+                       <td>{{ $doctor->hospital_name }}</td>
                     </tr>
                     <tr>
                         <th>Chamber Name</th>
-                        <td>{{ $doctor_deatils->chamber_name }}</td>
+                        <td>{{ $doctor->chamber_name }}</td>
                     </tr>
                     <tr>
                         <th>Visiting Hour</th>
-                        <td>{{ $doctor_deatils->visiting_hour }}</td>
+                        <td>{{ $doctor->visiting_hour }}</td>
                     </tr>
                     <tr>
                         <th>Chamber Location</th>
-                        <td>{{ $doctor_deatils->chamber_location }}</td>
+                        <td>{{ Auth::user()->address }}</td>
                     </tr>
                     <tr>
                         <th>Contact No</th>
-                        <td>{{ $doctor_deatils->contact_no }}</td>
+                        <td>{{ Auth::user()->contact_no }}</td>
                     </tr>
                     <tr>
                         <th>Email Address</th>
-                        <td>{{ $doctor_deatils->email_address }}</td>
+                        <td>{{ Auth::user()->email }}</td>
                     </tr>
                     <tr>
                         <th>Age</th>
-                        <td>{{ $doctor_deatils->age }}</td>
+                        <td>{{ Auth::user()->age }}</td>
                     </tr>
                     <tr>
                         <th>Gender</th>
-                        <td>{{ $doctor_deatils->gender }}</td>
+                        {{-- <td>{{ $doctor->gender }}</td> --}}
                     </tr>
                 </tbody>
             </table>
