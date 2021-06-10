@@ -36,6 +36,8 @@ class PaymentController extends Controller
             //     'amount'=> 'max:500|min:500'
             // ]);
             $appointment=Appointment::with('tests')->find($id);
+            // dd($appointment);
+            // die();
 
             $total =0;
 

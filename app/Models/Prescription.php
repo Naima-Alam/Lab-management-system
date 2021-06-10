@@ -13,12 +13,8 @@ class Prescription extends Model
 
     public function appointmentDoctor(){
 
-        return $this->belongsTo(Doctor::class, 'doctor_id', 'id'); //relation
+        return $this->belongsTo(User::class, 'doctor_id', 'id'); //relation
     }
-
-
-
-
 
     public function paitent()
     {

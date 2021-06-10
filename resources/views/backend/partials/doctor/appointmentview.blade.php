@@ -63,7 +63,8 @@
         <td>{{ $data->appointmentSlot->form_time}}-{{ $data->appointmentSlot->to_time->format('h:i:s A')}}</td>
         <td>{{ $data->appointment_date}}</td>
         <td>{{ $data->description}}</td>
-        <td>{{ $data->image}}</td>
+        <td><img width="150px" src="{{ asset('/uploads/appointment/' . $data->image) }}" alt=""></td>
+        {{-- <td>{{ $data->image}}</td> --}}
         <td>{{ $data->test_status}}</td>
 
 

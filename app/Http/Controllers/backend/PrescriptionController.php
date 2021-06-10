@@ -30,8 +30,8 @@ class PrescriptionController extends Controller
             'frequency'=>$request->frequency,
             'period'=>$request->period,
         ]);
-
-         return redirect()->route('prescription.view');
+          return redirect()->back();
+        //  return redirect()->route('prescription.view');
     }
 
      // For List
@@ -39,10 +39,13 @@ class PrescriptionController extends Controller
 
         $prescription = Prescription::with('appointmentDoctor','paitent')->findOrFail($id);
 
+
         return view('backend.partials.doctor.prescriptionview', compact('prescription'));
     }
     public function list(){
-        $prescription= Prescription::all();
+
+        $prescription= Prescription::with('appointmentDoctor','paitent')->get();
+
         return view('backend.partials.doctor.prescriptionlist',compact('prescription'));
     }
 

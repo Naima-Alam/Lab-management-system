@@ -36,13 +36,16 @@
             <div class="card-header">
             Test Report
             @foreach ($appointment_list as $key => $data)
+            @endforeach
             <div class="col-sm-6">
+
+
                 <strong>Date:{{ $data->updated_at }}</strong>
-                @endforeach
             </div>
             <div class="card-body">
                 <div class="row mb-4">
                     <div class="col-sm-6">
+
                         <h6 class="mb-3">From:</h6>
                         <div>
                             <strong>Diagnostic Center</strong>

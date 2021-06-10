@@ -166,8 +166,10 @@ class AppointmentController extends Controller
     //test report list
     public function testreport()
     {
+
         $appointment_list = Appointment::where('patient_id', auth()->user()->id)->get();
         $patients_list = User::all();
+        //dd( $patients_list);
         return view('backend.partials.appointment.apppointmentreport', compact('appointment_list', 'patients_list'));
     }
 

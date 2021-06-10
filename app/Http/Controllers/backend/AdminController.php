@@ -51,9 +51,16 @@ class AdminController extends Controller
     public function dashboard(){
         //dd('doctor_deatils ');
         $doctor_deatils = Doctor::all();
+
         return view('backend.master',compact('doctor_deatils'));
     }
 
+ //  For Edit
+ public function edit($id)
+ {
+     $doctor = Doctor::findOrFail($id);
+     return view('backend.partials.doctor.edit', compact('doctor'));
+ }
     public function logout()
     {
         Auth::logout();

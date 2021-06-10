@@ -23,7 +23,13 @@
                         </div>
                         <div class="form-group form-float">
                             <div class="form-line">
-                                <label class="form-label">Bikash Number</label>
+                                <label class="form-label">Send to money on this number:01883860352</label>
+
+                            </div>
+                        </div>
+                        <div class="form-group form-float">
+                            <div class="form-line">
+                                <label class="form-label">Bkash Number</label>
                                 <input type="text" class="form-control" name="bikash">
                             </div>
                         </div>

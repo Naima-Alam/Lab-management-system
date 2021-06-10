@@ -2,11 +2,11 @@
 
 namespace App\Mail;
 
-use App\Models\Appointment;
+use App\Models\Test;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class AppointmentNotification extends Mailable
 {
@@ -31,7 +31,10 @@ class AppointmentNotification extends Mailable
      */
     public function build()
     {
-
+        // $this->book = Test::where('id', $this->appointment['test_id'])->first();
         return $this->view('frontend.layouts.email')->with(['appointmentData'=>$this->book]);
+        // return $this->view('frontend.layouts.email', [
+        //     'appointmentData' => $this->book
+        // ]);
     }
 }

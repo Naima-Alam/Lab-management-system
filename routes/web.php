@@ -70,7 +70,7 @@ Route::post('/registration/create', [UserController::class, 'register'])->name('
 Route::get('/user/login', [UserController::class, 'loginForm'])->name('login.form');
 Route::post('/dologin', [UserController::class, 'doLogin'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
-
+//reset password
 Route::get('/user/password/recovery', [UserController::class, 'userPasswordRecovery'])->name('user.password.recovery');
 Route::post('/user/password/validate', [UserController::class, 'userPasswordRecoveryValidate'])->name('user.email.validate');
 Route::get('/user/password/update/form/{id}', [UserController::class, 'userPasswordUpdate'])->name('user.password.update');
@@ -156,7 +156,6 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('view/{id}', [AppointmentController::class, 'view'])->name('appointment.view');
         Route::get('accepted/{id}', [AppointmentController::class, 'accepted'])->name('appointment.accepted');
         Route::get('rejected/{id}', [AppointmentController::class, 'rejected'])->name('appointment.rejected');
-
         Route::get('rejected_all/{id}', [AppointmentController::class, 'rejectedAll'])->name('appointment.rejectedAll');
         Route::get('restore/{id}', [AppointmentController::class, 'restore'])->name('appointment.restore');
         Route::get('cancleform/{id}', [AppointmentController::class, 'cancleform'])->name('cancle.form');

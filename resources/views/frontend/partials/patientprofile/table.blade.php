@@ -96,6 +96,7 @@
                     <th scope="col">Doctor Name</th>
                     <th scope="col">Consultation time</th>
                     <th scope="col">Due Amount</th>
+                    <th scope="col">Prescription</th>
                     <th scope="col">Test Name</th>
                     <th scope="col">Status</th>
                     <th scope="col">Payment Status</th>
@@ -118,6 +119,10 @@
                         <td>{{ $data->appointmentSlot->form_time->format('h:i:s A') }}-{{ $data->appointmentSlot->to_time->format('h:i:s A') }}
                         </td>
                         <td>{{$data->due_amount }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-sm btn-primary" href="{{ route('prescription.view', $data->id) }}">View</a>
+
+                        </td>
                         <td>
                             @isset($data->tests)
                                 @foreach ($data->tests as $test)

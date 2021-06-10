@@ -6,7 +6,7 @@
         <div class="col-lg-10 col-md-7 col-sm-7 col-xs-8">
             <div class="card">
                 <div class="header">
-                    <h2>Doctor Registration Form</h2>
+                    <h2>Edit you profile</h2>
                     <ul class="header-dropdown m-r--5">
                     </ul>
                 </div>

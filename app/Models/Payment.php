@@ -12,4 +12,10 @@ class Payment extends Model
     protected $table="payment";
 
     protected $guarded = [];
+
+    public function paymentstatus()
+    {
+
+        return $this->hasOne(Payment::class, 'appointment_id', 'id'); //
+    }
 }

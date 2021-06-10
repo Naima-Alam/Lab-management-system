@@ -7,6 +7,9 @@
             width: 80%;
             font-size: 12px;
         }
+        .naima {
+            font-size: 25px;
+        }
         #appointment td,
         #appointment th {
             border: 1px solid #ddd;
@@ -38,24 +41,24 @@
                     <div class="col-sm-6" style="float: left;margin-right:10px;">
                         <h6 class="mb-3">From:</h6>
                         <div>
-                            <strong>Diagnostic Center</strong>
+                            <strong class="naima">Diagnostic Center</strong>
                         </div>
-                        <div>Uttara,Dhaka</div>
-                        <div>Email: diagnostic@gmail.com</div>
-                        <div>Phone: +8801784438727</div>
+                        <div  class="naima">Uttara,Dhaka</div>
+                        <div  class="naima">Email: diagnostic@gmail.com</div>
+                        <div  class="naima">Phone: +8801784438727</div>
                     </div>
 
                     <div class="col-sm-6" style="float: left">
 
                         <h6 class="mb-3">To:</h6>
                         <div>
-                            <strong>Patient ID:{{ $appointment->name }}</strong>
+                            <strong class="naima">Patient ID:{{ $appointment->name }}</strong>
                         </div>
 
-                        <div><strong>Doctor Name:{{ $appointment->appointmentDoctor->doctors_name  }}</strong>
+                        <div><strong class="naima">Doctor Name:{{ $appointment->appointmentDoctor->doctors_name  }}</strong>
                         </div>
-                        <div>Email:{{ $appointment->patient->email }}</div>
-                        <div>Phone:{{ $appointment->patient->contact_no}}</div>
+                        <div class="naima">Email:{{ $appointment->patient->email }}</div>
+                        <div class="naima">Phone:{{ $appointment->patient->contact_no}}</div>
                     </div>
                 </div>
 

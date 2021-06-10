@@ -156,7 +156,8 @@ class DoctorController extends Controller
     //  For Edit
     public function edit($id)
     {
-        $doctor = Doctor::findOrFail($id);
+        // $doctor = Doctor::findOrFail($id);
+        $doctor = Doctor::where('user_id', $id)->first();
         return view('backend.partials.doctor.edit', compact('doctor'));
     }
 

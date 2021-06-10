@@ -30,7 +30,7 @@
 
 
             <tr>
-                <td>{{ $data->appointmentDoctor->doctors_name  }}</td>
+                <td>{{ $data->appointmentDoctor->name }}</td>
                 <td>{{ $data->paitent->name }}</td>
 
                 <td>{{ $data->medicine_name }}</td>
